@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code One Hosting</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A modern, visually appealing landing page for a game server hosting company, inspired by a user-provided design. Features sections for hero content, key features, and hosting plans." />
+    <meta name="keywords" content="game server hosting, Code One Hosting, minecraft hosting, rust hosting, ark hosting, valheim hosting, cloud vps, dedicated servers, web hosting, discord bot hosting" />
+    <meta name="author" content="Code One Hosting" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -12,10 +18,12 @@
           extend: {
             colors: {
               'brand-purple': '#8A2BE2',
-              'dark-bg': '#0D0E1B',
+              'dark-bg': '#0A0B18',
               'card-bg': 'rgba(23, 24, 43, 0.5)',
               'card-bg-solid': '#17182B',
               'brand-green': '#22C55E',
+              'brand-cyan': '#22D3EE',
+              'brand-magenta': '#E11D48',
               'brand-green-dark-bg': '#11221C',
               'badge-bg': '#2C1D4F',
               'badge-text': '#C5B3F2',
@@ -50,6 +58,10 @@
               'pulse-glow-purple': {
                   '0%, 100%': { boxShadow: '0 0 20px -5px rgba(168, 85, 247, 0.4)' },
                   '50%': { boxShadow: '0 0 30px 0px rgba(168, 85, 247, 0.6)' },
+              },
+               'pulse-glow-cyan': {
+                  '0%, 100%': { boxShadow: '0 0 25px -5px rgba(34, 211, 238, 0.4)' },
+                  '50%': { boxShadow: '0 0 40px 0px rgba(34, 211, 238, 0.6)' },
               },
               'float-alt': {
                   '0%': { transform: 'translateY(0px) rotate(0deg) scale(1)' },
@@ -117,6 +129,67 @@
                 '0%': { transform: 'translateX(0%)' },
                 '100%': { transform: 'translateX(-50%)' },
               },
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.2)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.8)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              spin: {
+                'from': { transform: 'rotate(0deg)' },
+                'to': { transform: 'rotate(360deg)' },
+              },
+              radiate: {
+                '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 20px -5px rgba(56, 189, 248, 0.4)' },
+                '50%': { transform: 'scale(1.1)', boxShadow: '0 0 30px 5px rgba(56, 189, 248, 0.6)' },
+              },
+               'border-glow': {
+                '0%': { 'box-shadow': '0 0 5px -2px #22D3EE, inset 0 0 5px -2px #22D3EE' },
+                '50%': { 'box-shadow': '0 0 20px -2px #22D3EE, inset 0 0 20px -2px #22D3EE' },
+                '100%': { 'box-shadow': '0 0 5px -2px #22D3EE, inset 0 0 5px -2px #22D3EE' },
+              },
+              'data-pulse': {
+                  '0%, 100%': { opacity: 0.8, transform: 'scale(0.95)' },
+                  '50%': { opacity: 1, transform: 'scale(1.05)' },
+              },
+              'core-ring-pulse': {
+                '0%': { transform: 'scale(0.8)', opacity: '0.7' },
+                '100%': { transform: 'scale(3)', opacity: '0' },
+              },
+              'line-pulse': {
+                  '0%': { 'stroke-dashoffset': 300 },
+                  '100%': { 'stroke-dashoffset': 0 },
+              },
+              'plexus-pan': {
+                '0%': { backgroundPosition: '0% 0%' },
+                '100%': { backgroundPosition: '100px 100px' },
+              },
+              'border-chase': {
+                  '0%': { backgroundPosition: '0% 0%' },
+                  '50%': { backgroundPosition: '100% 100%' },
+                  '100%': { backgroundPosition: '0% 0%' },
+              },
+              'line-flow': {
+                '0%': { 'stroke-dashoffset': 1000 },
+                '100%': { 'stroke-dashoffset': 0 },
+              },
+              'map-pin-pulse': {
+                '0%': { transform: 'scale(0.5)', opacity: 0.75 },
+                '100%': { transform: 'scale(2.5)', opacity: 0 }
+              },
+              'data-flow': {
+                '0%': { 'offset-distance': '0%', opacity: 1 },
+                '90%': { opacity: 1 },
+                '100%': { 'offset-distance': '100%', opacity: 0 },
+              },
+              'border-glow-subtle': {
+                '0%, 100%': { borderColor: 'rgba(167, 85, 247, 0.3)' },
+                '50%': { borderColor: 'rgba(167, 85, 247, 0.7)' },
+              },
+               'tilt-in-fwd': {
+                '0%': { transform: 'rotateY(20deg) rotateX(35deg) translate(30px, -50px) skew(-35deg, 10deg)', opacity: 0 },
+                '100%': { transform: 'rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg)', opacity: 1 }
+              },
             },
             animation: {
               float: 'float 6s ease-in-out infinite',
@@ -125,20 +198,36 @@
               'text-focus-in': 'text-focus-in 0.6s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
               'text-blur-out': 'text-blur-out 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
               'pulse-glow-purple': 'pulse-glow-purple 3s ease-in-out infinite',
+              'pulse-glow-cyan': 'pulse-glow-cyan 3s ease-in-out infinite',
               'float-alt': 'float-alt 10s ease-in-out infinite',
               'rotate-globe': 'rotate-globe 40s linear infinite',
               'shooting-star': 'shooting-star 8s ease-in-out infinite',
               'fade-in': 'fade-in 0.5s ease-in-out forwards',
               'fade-out': 'fade-out 0.5s ease-in-out forwards',
-              'drift': 'drift 50s linear infinite alternate',
+              drift: 'drift 50s linear infinite alternate',
               'background-pan': 'background-pan 15s ease-in-out infinite',
               'float-cube': 'float-cube 15s ease-in-out infinite',
               'cloud-pulse': 'cloud-pulse 10s ease-in-out infinite',
               'slow-pan': 'slow-pan 40s ease-in-out infinite alternate',
-              'aurora': 'aurora 20s ease-in-out infinite',
+              aurora: 'aurora 20s ease-in-out infinite',
               'web-hero-float': 'web-hero-float 8s ease-in-out infinite',
               'grid-pan': 'grid-pan 20s linear infinite',
               'marquee-scroll': 'marquee-scroll 40s linear infinite',
+              blob: 'blob 10s ease-in-out infinite',
+              'spin-slow': 'spin 20s linear infinite',
+              'spin-slower': 'spin 40s linear infinite reverse',
+              radiate: 'radiate 4s ease-in-out infinite',
+              'logo-pulse': 'border-glow 2.5s ease-in-out infinite',
+              'data-pulse': 'data-pulse 3s ease-in-out infinite',
+              'core-ring-pulse': 'core-ring-pulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+              'line-pulse': 'line-pulse 15s linear infinite',
+              'plexus-pan': 'plexus-pan 40s linear infinite',
+              'border-chase': 'border-chase 4s linear infinite',
+              'line-flow': 'line-flow 5s linear infinite',
+              'map-pin-pulse': 'map-pin-pulse 2s ease-out infinite',
+              'data-flow': 'data-flow 4s ease-in-out infinite',
+              'border-glow-subtle': 'border-glow-subtle 3s ease-in-out infinite',
+              'tilt-in-fwd': 'tilt-in-fwd 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
             }
           },
         },
