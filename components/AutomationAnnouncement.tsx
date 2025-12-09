@@ -1,12 +1,7 @@
 
 import React from 'react';
-import { Page } from '../App';
 
-interface AutomationAnnouncementProps {
-    setPage: (page: Page) => void;
-}
-
-const AutomationAnnouncement: React.FC<AutomationAnnouncementProps> = ({ setPage }) => {
+const AutomationAnnouncement: React.FC = () => {
     return (
         <section className="py-16 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,13 +23,6 @@ const AutomationAnnouncement: React.FC<AutomationAnnouncementProps> = ({ setPage
                         <p className="mt-4 text-gray-300">
                             Say goodbye to waiting. Our custom automation engine links our billing system directly to our game panel. The moment your order is complete, your server starts building. No manual intervention, just instant setup.
                         </p>
-                        <button 
-                            onClick={() => setPage('automation')}
-                            className="mt-8 inline-flex items-center space-x-2 bg-white/10 border border-white/20 text-white font-semibold py-2 px-6 rounded-lg hover:bg-white/20 transition-colors"
-                        >
-                            <span>See How It Works</span>
-                            <i className="fa-solid fa-arrow-right text-sm"></i>
-                        </button>
                     </div>
                 </div>
             </div>

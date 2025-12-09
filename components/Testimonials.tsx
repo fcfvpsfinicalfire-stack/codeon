@@ -3,10 +3,10 @@ import React from 'react';
 
 const testimonialsData = [
     {
-        quote: "Code One Hosting has completely changed our server experience. The performance is incredible, and the support team is always there to help, day or night. 10/10 would recommend!",
-        name: 'John "Krypto" Doe',
-        role: 'Rust Server Admin',
-        avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+        quote: "Code On Hosting has completely changed our server experience. The performance is incredible, and the support team is always there to help, day or night. 10/10 would recommend!",
+        name: 'RASmaner',
+        role: 'Youtuber',
+        avatar: 'https://i.postimg.cc/65BcPQCC/pack.png',
         stars: 5,
     },
     {
@@ -17,7 +17,7 @@ const testimonialsData = [
         stars: 5,
     },
     {
-        quote: "We've tried multiple hosting providers, and Code One is by far the best. The DDoS protection is top-notch, and we've had zero downtime since switching. Our players are happier than ever.",
+        quote: "We've tried multiple hosting providers, and Code On is by far the best. The DDoS protection is top-notch, and we've had zero downtime since switching. Our players are happier than ever.",
         name: 'Alex Johnson',
         role: 'ARK Tribe Leader',
         avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026706d',
@@ -66,15 +66,17 @@ const Testimonials: React.FC = () => {
 
     return (
         <section className="py-16 md:py-24 relative overflow-hidden">
-            <div className="absolute inset-0 z-0">
-                <img src="https://i.postimg.cc/YCSHsP24/image-2025-11-27-173359794.png" alt="Automation flow diagram background" className="w-full h-full object-cover opacity-10" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/80 to-dark-bg"></div>
-            </div>
+            <div className="absolute inset-0 z-0 opacity-20" style={{
+                backgroundImage: 'radial-gradient(circle, white 0.5px, transparent 1px)',
+                backgroundSize: '2.5rem 2.5rem'
+            }}></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/80 to-dark-bg"></div>
+            
             <div className="relative z-10">
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold">Trusted by Gamers Worldwide</h2>
-                    <p className="mt-4 text-gray-300">
-                        Don't just take our word for it. Here's what some of our amazing customers have to say about their experience with Code One Hosting.
+                    <h2 className="text-4xl md:text-5xl font-bold">Loved By <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-magenta">Creators & Developers</span></h2>
+                    <p className="mt-4 text-lg text-gray-300">
+                        Don't just take our word for it. Here's what some of our amazing customers have to say about their experience with Code On Hosting.
                     </p>
                 </div>
                 <div className="mt-16 relative">

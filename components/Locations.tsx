@@ -1,47 +1,60 @@
+
 import React from 'react';
 
 const locations = [
-  { name: 'Singapore', flag: '🇸🇬' },
-  { name: 'Germany', flag: '🇩🇪' },
-  { name: 'USA', flag: '🇺🇸' },
-  { name: 'Brazil', flag: '🇧🇷' },
-  { name: 'Australia', flag: '🇦🇺' },
+  { name: 'Singapore', region: 'India', flag: '🇸🇬' },
+  { name: 'Mumbai', region: 'India', flag: '🇮🇳' },
+  { name: 'Kansas City, MO', region: 'US Central', flag: '🇺🇸' },
+  { name: 'Sri Lanka', region: 'South Asia', flag: '🇱🇰', comingSoon: true },
 ];
 
-const LocationCard: React.FC<{ location: typeof locations[0] }> = ({ location }) => (
-  <div className="relative group bg-card-bg-solid/50 backdrop-blur-md border border-white/10 rounded-xl p-6 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-900/50 hover:border-cyan-500/50">
-      <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
-          {location.flag}
-      </div>
-      <h3 className="text-lg font-bold text-white">{location.name}</h3>
-      <div className="mt-2 flex items-center justify-center space-x-2">
-          <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </span>
-          <span className="text-sm font-semibold text-green-400">ONLINE</span>
-      </div>
-  </div>
+const LocationItem: React.FC<{ location: typeof locations[0] }> = ({ location }) => (
+    <div className="flex items-center space-x-4 bg-card-bg-solid/50 p-4 rounded-lg border border-white/10">
+        <span className="text-4xl">{location.flag}</span>
+        <div>
+            <div className="flex items-center space-x-2">
+              <h4 className="font-bold text-white text-lg">{location.name}</h4>
+              {location.comingSoon && (
+                  <span className="bg-yellow-500/20 text-yellow-300 text-xs font-bold px-2 py-0.5 rounded-full border border-yellow-500/50">
+                      Coming soon
+                  </span>
+              )}
+            </div>
+            <p className="text-gray-400">{location.region}</p>
+        </div>
+    </div>
 );
+
 
 const Locations: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-[#101123] to-dark-bg z-0"></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Global Network, Local Performance</h2>
-          <p className="mt-4 text-gray-300">
-            Deploy your servers close to your players for the best possible latency and gaming experience. Our network is optimized for performance and reliability.
-          </p>
-        </div>
-        <div className="mt-16 max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {locations.map((loc, index) => (
-              <LocationCard key={index} location={loc} />
-            ))}
-          </div>
-        </div>
+    <section className="py-16 md:py-24 relative overflow-hidden bg-dark-bg">
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-[#101123] to-dark-bg z-0"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            {/* Text Content */}
+            <div>
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
+                    Global <span className="text-accent-purple">Presence</span>,
+                    <br />
+                    Local <span className="text-accent-purple">Performance</span>
+                </h2>
+                <p className="mt-6 text-lg text-gray-300">
+                    Our rapidly expanding datacenter network spans across the Americas and Europe, delivering ultra-low latency from anywhere and lightning-fast connections wherever you play.
+                </p>
+                <div className="mt-8">
+                    <h3 className="text-xl font-bold mb-4 text-gray-200">Locations</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {locations.map((loc, index) => (
+                            <LocationItem key={index} location={loc} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+            
+            {/* Globe Visual */}
+            <div className="relative flex items-center justify-center">
+                <img src="https://i.postimg.cc/LsSfwHPj/image.png" alt="Glowing purple globe of the world" className="w-full max-w-lg animate-[pulse-glow-purple_5s_ease-in-out_infinite]" />
+            </div>
       </div>
     </section>
   );

@@ -69,7 +69,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ plan, setPage }) => {
                     <div className="mt-8 text-center bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
                         <h3 className="font-semibold text-white">What happens next?</h3>
                         <p className="text-sm text-purple-200 mt-2">
-                            Once your payment is complete, our automated system will instantly create your server. You'll receive an email with all the details. This system is powered by the script on our <button onClick={() => setPage('automation')} className="underline font-bold">Automation</button> page.
+                            Once your payment is complete, our automated system will instantly create your server. You'll receive an email with all the details. This system is powered by our custom automation engine.
                         </p>
                     </div>
                 </div>

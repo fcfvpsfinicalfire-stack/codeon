@@ -4,7 +4,7 @@ const JoinDiscord: React.FC = () => {
     return (
         <section className="my-16 md:my-24">
             <a 
-                href="https://discord.gg/MGd8tERV" 
+                href="https://discord.gg/ZjJz8GKB" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block bg-discord-blue rounded-xl p-8 md:p-12 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] group"
@@ -20,7 +20,7 @@ const JoinDiscord: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex justify-start md:justify-end">
-                        <img src="https://i.postimg.cc/zvDF0Ggn/image-removebg-preview-(1).png" alt="Illustration of Discord community" className="w-64 rounded-lg transition-transform duration-300 group-hover:rotate-3" />
+                        <img src="https://i.postimg.cc/sDkQbGRM/image.png" alt="Modern illustration of a person on a chair with a headset" className="w-64 rounded-lg transition-transform duration-300 group-hover:rotate-3" />
                     </div>
                 </div>
 

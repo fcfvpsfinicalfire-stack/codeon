@@ -42,11 +42,16 @@ const WhyChooseUsCard: React.FC<{ item: typeof whyChooseUsData[0] }> = ({ item }
 
 const WhyChooseUs: React.FC = () => {
     return (
-        <section className="py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('https://i.postimg.cc/NMHknXyF/image.png')"}}>
-            <div className="absolute inset-0 bg-dark-bg/90 backdrop-blur-sm"></div>
+        <section className="py-16 md:py-24 relative overflow-hidden bg-dark-bg">
+            <div className="absolute inset-0 bg-dark-bg/90 backdrop-blur-sm z-0"></div>
+            <div className="absolute inset-0 z-0 opacity-20 animate-plexus-pan"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.2'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7-7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+            ></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-bold">Why Trust <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-magenta">Code One?</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-bold">Why Trust <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-magenta">Code On Hosting?</span></h2>
                     <p className="mt-4 text-lg text-gray-300">
                         We are committed to providing the best hosting experience with unbeatable performance, reliability, and support. Here's what sets us apart.
                     </p>

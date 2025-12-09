@@ -1,102 +1,117 @@
+
 import React from 'react';
-import { Page } from '../App';
-import WhyChooseUs from '../components/WhyChooseUs';
-import FAQ from '../components/FAQ';
-import JoinDiscord from '../components/JoinDiscord';
-import Locations from '../components/Locations';
+import SpecializedSolutions from '../components/SpecializedSolutions';
+import AdvancedFeatures from '../components/AdvancedFeatures';
+import IncludedFeatures from '../components/IncludedFeatures';
 
-// --- DATA ---
-const games = [
-    { id: 'minecraft', name: 'Minecraft', image: 'https://i.postimg.cc/NMHknXyF/image.png' },
-    { id: 'rust', name: 'Rust', image: 'https://i.postimg.cc/pVj8885C/image.png' },
-    { id: 'ark', name: 'ARK: Survival', image: 'https://i.postimg.cc/tRr03Z0h/image.png' },
-    { id: 'valheim', name: 'Valheim', image: 'https://i.imgur.com/OS2yvSP.png' },
-    { id: 'mta', name: 'MTA:SA', image: 'https://i.imgur.com/IksA5Tj.png' },
+// Data for the control panel features
+const controlPanelFeatures = [
+    { icon: 'fa-solid fa-download', title: '1-Click Installations', description: 'Install games, mods, and plugins with just a single click. Our intuitive interface makes server setup a breeze.' },
+    { icon: 'fa-solid fa-folder-open', title: 'Advanced File Manager', description: 'Upload, download, and manage your files with our powerful file manager. Edit configurations directly in your browser.' },
+    { icon: 'fa-solid fa-floppy-disk', title: 'Automated Backups', description: 'Schedule automatic backups of your server to ensure your data is always safe and recoverable.' },
+    { icon: 'fa-solid fa-terminal', title: 'Live Console Access', description: 'Monitor and control your server with real-time console access. Execute commands and view logs instantly.' },
+    { icon: 'fa-solid fa-bolt', title: 'Instant Scaling', description: 'Upgrade or downgrade your server resources with zero downtime as your community grows.' },
+    { icon: 'fa-solid fa-link', title: 'Free Subdomain', description: 'Get a free custom subdomain for your server to make it easily accessible to your players.' }
 ];
 
-const features = [
-    { icon: 'fa-rocket', title: 'Instant Setup', description: 'Deploy in minutes' },
-    { icon: 'fa-shield-halved', title: 'DDoS Protection', description: 'Always-on security' },
-    { icon: 'fa-headset', title: '24/7 Support', description: 'Expert help anytime' },
-    { icon: 'fa-gamepad', title: 'Powerful Panel', description: 'Full server control' },
+// Data for DDoS stats
+const ddosStats = [
+    { value: '99.99%', label: 'Mitigation Rate' },
+    { value: '1 Tbps+', label: 'Capacity' },
+    { value: '<10ms', label: 'Response Time' },
+    { value: '24/7', label: 'Protection' }
 ];
 
-// --- COMPONENTS ---
-const Background: React.FC = () => (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-dark-bg">
-        <div className="absolute inset-0 animate-aurora opacity-50" style={{
-            background: 'linear-gradient(125deg, rgba(34, 197, 94, 0.15) 0%, rgba(13, 14, 27, 0) 25%, rgba(138, 43, 226, 0.1) 50%, rgba(13, 14, 27, 0) 75%, rgba(34, 197, 94, 0.15) 100%)',
-            backgroundSize: '400% 400%',
-        }}></div>
+// Component for a feature in the grid below the control panel
+const ControlPanelFeature: React.FC<{ feature: typeof controlPanelFeatures[0] }> = ({ feature }) => (
+    <div className="bg-card-bg-solid/50 border border-white/10 rounded-xl p-6 flex items-start space-x-4">
+        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-accent-purple/10 rounded-lg text-accent-purple text-2xl">
+            <i className={feature.icon}></i>
+        </div>
+        <div>
+            <h3 className="font-bold text-white text-lg">{feature.title}</h3>
+            <p className="text-gray-400 text-sm mt-1">{feature.description}</p>
+        </div>
     </div>
 );
 
-const GameCard: React.FC<{ game: typeof games[0]; setPage: (page: Page) => void }> = ({ game, setPage }) => (
-    <button 
-        onClick={() => setPage('pricing')}
-        className="relative group bg-card-bg-solid border border-white/10 rounded-2xl p-6 text-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/50 overflow-hidden"
-    >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full">
-            <img src={game.image} alt={game.name} className="w-24 h-24 object-contain mb-4 transition-transform duration-300 group-hover:scale-110" />
-            <h3 className="text-xl font-bold text-white">{game.name}</h3>
+// Component for the animated DDoS shield
+const DdosShield: React.FC = () => (
+    <div className="relative w-64 h-64 flex items-center justify-center">
+        {/* Radiating circles */}
+        <div className="absolute inset-0 border-2 border-blue-500/20 rounded-full animate-spin-slow"></div>
+        <div className="absolute inset-4 border-2 border-blue-500/20 rounded-full animate-spin-slower"></div>
+        <div className="absolute inset-8 border-dashed border border-blue-500/30 rounded-full animate-spin-slow" style={{ animationDirection: 'reverse' }}></div>
+
+        {/* Central Icon */}
+        <div className="relative w-24 h-24 bg-card-bg-solid rounded-full flex items-center justify-center border-2 border-blue-500/50 shadow-[0_0_20px_theme(colors.blue.500)]">
+            <i className="fa-solid fa-shield-halved text-4xl text-blue-400"></i>
         </div>
-    </button>
+    </div>
 );
 
 
-interface GameServersPageProps {
-    setPage: (page: Page) => void;
-}
-
-const GameServersPage: React.FC<GameServersPageProps> = ({ setPage }) => {
+const GameServersPage: React.FC = () => {
     return (
         <>
-            <div className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-                <Background />
-                <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="inline-flex items-center space-x-2 bg-badge-bg border border-green-500/50 text-green-300 font-semibold px-4 py-2 rounded-full mb-6">
-                        <i className="fa-solid fa-gamepad"></i>
-                        <span>Game Server Hosting</span>
-                    </div>
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
-                        Unleash Your Gaming World
-                    </h1>
-                    <p className="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
-                        High-performance, low-latency server hosting for the world's most popular games. Your adventure starts here.
-                    </p>
-                </div>
-            </div>
+            <SpecializedSolutions />
+            <AdvancedFeatures />
+            <IncludedFeatures />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Features Bar */}
-                <div className="bg-card-bg-solid/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    {features.map(feature => (
-                        <div key={feature.title} className="flex flex-col items-center">
-                            <i className={`fa-solid ${feature.icon} text-3xl text-brand-cyan mb-2`}></i>
-                            <h4 className="font-semibold text-white">{feature.title}</h4>
-                            <p className="text-sm text-gray-400">{feature.description}</p>
+            <div className="py-16 md:py-24 space-y-24 md:space-y-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section 1: The Ultimate Game Control Panel */}
+                <section>
+                    <div className="text-center max-w-3xl mx-auto">
+                        <div className="inline-flex items-center space-x-2 bg-accent-purple/20 text-accent-purple font-semibold px-4 py-2 rounded-full mb-4 text-sm">
+                            <span>POWERFUL & INTUITIVE</span>
                         </div>
-                    ))}
-                </div>
+                        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
+                            The Ultimate <span className="text-accent-purple">Game Control Panel</span>
+                        </h1>
+                        <p className="text-lg text-gray-300">
+                            Our custom-built control panel puts you in complete control of your game server with an intuitive interface and powerful management tools.
+                        </p>
+                    </div>
 
-                {/* Game Grid */}
-                <div className="py-16 md:py-24">
-                    <h2 className="text-3xl font-bold text-center mb-12">Choose Your Game</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        {games.map(game => (
-                            <GameCard key={game.id} game={game} setPage={setPage} />
+                    <div className="mt-16 relative p-2 bg-card-bg-solid/50 border border-white/10 rounded-xl shadow-2xl shadow-black/50">
+                        <img src="https://i.postimg.cc/vHXzjmtK/image.png" alt="Code On Hosting Game Control Panel" className="rounded-lg w-full" />
+                        <div className="absolute -bottom-4 right-8 bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-md shadow-lg">
+                            Powerful & User-Friendly
+                        </div>
+                    </div>
+
+                    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {controlPanelFeatures.map((feature, index) => (
+                            <ControlPanelFeature key={index} feature={feature} />
                         ))}
                     </div>
-                </div>
-            </div>
-            
-            <WhyChooseUs />
+                </section>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Locations />
-                <FAQ />
-                <JoinDiscord />
+                {/* Section 2: Advanced DDoS Protection */}
+                <section className="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div className="inline-flex items-center space-x-2 bg-accent-purple/20 text-accent-purple font-semibold px-4 py-2 rounded-full mb-4 text-sm">
+                            <span>DDOS PROTECTION</span>
+                        </div>
+                        <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
+                            Advanced <span className="text-accent-purple">DDoS Protection</span>
+                        </h2>
+                        <p className="text-lg text-gray-300">
+                            Multi-layered security system that shields your game servers from attacks, ensuring uninterrupted gameplay with sub-10ms mitigation response.
+                        </p>
+                        <div className="mt-8 grid grid-cols-2 gap-4">
+                            {ddosStats.map((stat, index) => (
+                                <div key={index} className="bg-card-bg-solid/50 border border-white/10 rounded-lg p-4 text-center">
+                                    <p className="text-2xl font-bold text-white">{stat.value}</p>
+                                    <p className="text-sm text-gray-400">{stat.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <DdosShield />
+                    </div>
+                </section>
             </div>
         </>
     );

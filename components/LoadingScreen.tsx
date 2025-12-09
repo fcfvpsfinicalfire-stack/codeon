@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const LoadingScreen: React.FC = () => {
@@ -15,8 +14,8 @@ const LoadingScreen: React.FC = () => {
 
             {/* Logo and Animation */}
             <div className="relative flex flex-col items-center justify-center">
-                <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code One Hosting Logo" className="h-12 animate-pulse" />
-                <span className="font-bold text-2xl text-white tracking-wider mt-4 animate-pulse">CODE ONE HOSTING</span>
+                <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code On Hosting Logo" className="h-12 animate-pulse" />
+                <span className="font-bold text-2xl text-white tracking-wider mt-4 animate-pulse">CODE ON HOSTING</span>
                 <p className="text-gray-400 mt-6 tracking-widest animate-pulse">INITIALIZING...</p>
             </div>
         </div>

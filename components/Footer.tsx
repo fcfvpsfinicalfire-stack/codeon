@@ -29,8 +29,8 @@ const Footer: React.FC<FooterProps> = ({ setPage }) => {
                 <div className="flex flex-col">
                      <div className="mb-4">
                         <button onClick={() => setPage('home')} className="flex items-center space-x-3">
-                            <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code One Hosting Logo" className="h-10" />
-                            <span className="font-bold text-xl text-white tracking-wider">CODE ONE HOSTING</span>
+                            <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code On Hosting Logo" className="h-10" />
+                            <span className="font-bold text-xl text-white tracking-wider">CODE ON HOSTING</span>
                         </button>
                     </div>
                     <p className="text-gray-400 mb-6 max-w-xs">High-performance hosting solutions for gamers, developers, and businesses.</p>
@@ -59,7 +59,7 @@ const Footer: React.FC<FooterProps> = ({ setPage }) => {
                     <h3 className="text-lg font-semibold text-white mb-4">Company</h3>
                     <ul className="space-y-3">
                         <li><a href="#" className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">About Us</a></li>
-                        <li><a href="#" className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">Contact</a></li>
+                        <li><button onClick={() => setPage('contact')} className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">Contact</button></li>
                         <li><a href="#" className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">Partnerships</a></li>
                         <li><a href="#" className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">Terms of Service</a></li>
                         <li><a href="#" className="text-gray-400 hover:text-brand-cyan transition-colors duration-300">Privacy Policy</a></li>
@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ setPage }) => {
         </div>
         <div className="border-t border-white/10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500 text-sm">
-                <p>&copy; {new Date().getFullYear()} Code One Hosting. All Rights Reserved. Built with passion.</p>
+                <p>&copy; {new Date().getFullYear()} Code On Hosting. All Rights Reserved. Built with passion.</p>
             </div>
         </div>
     </footer>

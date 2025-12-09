@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { Page } from '../App';
 
@@ -40,8 +39,8 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
       {/* Main header */}
       <div className="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3">
         <button onClick={() => setPage('home')} className="flex items-center space-x-3">
-          <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code One Hosting Logo" className="h-10" />
-          <span className="font-bold text-xl hidden sm:inline-block text-white tracking-wider">CODE ONE HOSTING</span>
+          <img src="https://i.postimg.cc/qMMj11z0/codeon.png" alt="Code On Hosting Logo" className="h-10" />
+          <span className="font-bold text-xl hidden sm:inline-block text-white tracking-wider">CODE ON HOSTING</span>
         </button>
 
         <nav className="hidden lg:flex items-center space-x-8">
@@ -49,12 +48,13 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
           <button onClick={() => setPage('pricing')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Pricing</button>
           <button onClick={() => setPage('vps')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Cloud</button>
           <button onClick={() => setPage('dedicated')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Dedicated</button>
+          <button onClick={() => setPage('discord')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Discord Bot</button>
           <button onClick={() => setPage('webhosting')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">WebHosting</button>
-          <button onClick={() => setPage('automation')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Automation</button>
+          <button onClick={() => setPage('contact')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Contact</button>
         </nav>
 
         <div className="hidden lg:flex items-center space-x-4">
-          <a href="https://control.codeon.codes" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-brand-cyan to-brand-magenta text-white font-semibold py-2 px-4 rounded-lg flex items-center space-x-2 hover:opacity-90 transition-opacity">
+          <a href="https://ctrl.codeon.codes" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-brand-cyan to-brand-magenta text-white font-semibold py-2 px-4 rounded-lg flex items-center space-x-2 hover:opacity-90 transition-opacity">
             <i className="fa-solid fa-user"></i>
             <span>CLIENT SPACE</span>
           </a>
@@ -76,9 +76,9 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
           <button onClick={() => { setPage('dedicated'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Dedicated</button>
           <button onClick={() => { setPage('discord'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Discord Bot</button>
           <button onClick={() => { setPage('webhosting'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">WebHosting</button>
-          <button onClick={() => { setPage('automation'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Automation</button>
+          <button onClick={() => { setPage('contact'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Contact</button>
           <div className="border-t border-white/10 pt-4 mt-4">
-             <a href="https://control.codeon.codes" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-brand-cyan to-brand-magenta text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity">
+             <a href="https://ctrl.codeon.codes" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-brand-cyan to-brand-magenta text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity">
                 <i className="fa-solid fa-user"></i>
                 <span>CLIENT SPACE</span>
             </a>

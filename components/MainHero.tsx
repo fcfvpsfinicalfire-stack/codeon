@@ -1,16 +1,6 @@
+
 import React from 'react';
 import { Page } from '../App';
-
-const HeroAbstractBackground: React.FC = () => {
-    return (
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-            {/* Soft radial gradients */}
-            <div className="absolute top-0 -left-1/4 w-full h-full bg-gradient-radial from-brand-cyan/10 to-transparent to-70% blur-3xl animate-drift"></div>
-            <div className="absolute bottom-0 -right-1/4 w-full h-full bg-gradient-radial from-brand-magenta/10 to-transparent to-70% blur-3xl animate-drift" style={{animationDelay: '5s'}}></div>
-        </div>
-    );
-};
-
 
 interface MainHeroProps {
     setPage: (page: Page) => void;
@@ -19,20 +9,26 @@ interface MainHeroProps {
 const MainHero: React.FC<MainHeroProps> = ({ setPage }) => {
     return (
         <section className="relative text-center py-24 sm:py-32 md:py-40 flex items-center justify-center min-h-[70vh] sm:min-h-[80vh] overflow-hidden">
-            <HeroAbstractBackground />
+            <div className="absolute inset-0 bg-cover bg-center -z-10" style={{ backgroundImage: "url('https://i.postimg.cc/QxVJGCTT/image.png')"}}>
+                <div className="absolute inset-0 bg-dark-bg/60"></div>
+            </div>
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight animate-text-focus-in" style={{ textShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
+                <div className="inline-flex items-center space-x-2 bg-badge-bg text-badge-text font-semibold px-4 py-2 rounded-full mb-6 animate-text-focus-in" style={{ animationDelay: '0s' }}>
+                    <i className="fa-solid fa-bolt text-cyan-400"></i>
+                    <span>NEXT-GENERATION HOSTING</span>
+                </div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight animate-text-focus-in" style={{ textShadow: '0 0 20px rgba(0,0,0,0.5)', animationDelay: '0.2s' }}>
                     High-Performance Hosting, <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-magenta">Simplified</span>
                 </h1>
                 <p 
                     className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 animate-text-focus-in" 
-                    style={{ animationDelay: '0.3s' }}
+                    style={{ animationDelay: '0.5s' }}
                 >
                     Experience elite-tier game server and web hosting, powered by next-gen hardware and a passion for performance. Your project deserves the best.
                 </p>
                 <div 
                     className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-text-focus-in"
-                    style={{ animationDelay: '0.6s' }}
+                    style={{ animationDelay: '0.8s' }}
                 >
                     <button
                         onClick={() => setPage('pricing')}
