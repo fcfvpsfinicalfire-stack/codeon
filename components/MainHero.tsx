@@ -37,7 +37,7 @@ const MainHero: React.FC<MainHeroProps> = ({ setPage }) => {
                         Explore Hosting Plans
                     </button>
                     <a
-                        href="https://discord.gg/MGd8tERV"
+                        href="https://discord.gg/codeon"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto bg-card-bg-solid/80 backdrop-blur-sm border border-white/20 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center space-x-2"

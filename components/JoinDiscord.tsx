@@ -1,10 +1,11 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 
 const JoinDiscord: React.FC = () => {
     return (
         <section className="my-16 md:my-24">
             <a 
-                href="https://discord.gg/ZjJz8GKB" 
+                href="https://discord.gg/codeon" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block bg-discord-blue rounded-xl p-8 md:p-12 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] group"

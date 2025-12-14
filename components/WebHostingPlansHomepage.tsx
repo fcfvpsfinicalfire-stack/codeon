@@ -22,7 +22,7 @@ const WebHostingPlansHomepage: React.FC<WebHostingPlansHomepageProps> = ({ setPa
                         </p>
                         <div className="mt-8">
                             <a
-                                href="https://discord.gg/ZjJz8GKB"
+                                href="https://discord.gg/codeon"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-500 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-900/50"

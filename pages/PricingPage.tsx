@@ -137,7 +137,7 @@ const PlanCard: React.FC<{ plan: any, softwareName: string, locationFlag: string
                     Rs. {plan.price}
                     <span className="text-base font-normal text-gray-500">/mo</span>
                 </p>
-                <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer"
+                <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer"
                     className="w-full mt-5 bg-green-600 text-white font-bold py-2.5 rounded-lg hover:bg-green-500 transition-colors flex items-center justify-center space-x-2 text-sm">
                     <span>Order Now</span>
                     <i className="fa-solid fa-chevron-right text-xs"></i>

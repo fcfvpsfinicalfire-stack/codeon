@@ -78,7 +78,7 @@ const PlanCard: React.FC<{ plan: typeof vpsPlans[0] }> = ({ plan }) => {
                     <p className="text-gray-400 text-sm">Starts at</p>
                     <p className="text-2xl font-bold text-white">LKR {plan.price.toFixed(2)}<span className="text-base font-normal text-gray-400">/mo</span></p>
                 </div>
-                <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-2 px-5 rounded-lg hover:opacity-90 transition-opacity">
+                <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-2 px-5 rounded-lg hover:opacity-90 transition-opacity">
                     Deploy
                 </a>
             </div>

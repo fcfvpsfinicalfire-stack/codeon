@@ -132,7 +132,7 @@ const PlanConfigurator: React.FC = () => {
                           LKR {price.toFixed(2)}
                         </p>
                         <p className="text-gray-400">per month</p>
-                        <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className="w-full mt-6 bg-brand-green text-black font-bold py-3 rounded-lg text-lg flex items-center justify-center space-x-2 hover:bg-green-400 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-green/20">
+                        <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className="w-full mt-6 bg-brand-green text-black font-bold py-3 rounded-lg text-lg flex items-center justify-center space-x-2 hover:bg-green-400 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-green/20">
                             <span>Deploy Server</span>
                             <i className="fa-solid fa-arrow-right"></i>
                         </a>

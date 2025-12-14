@@ -133,7 +133,7 @@ const PlanCard: React.FC<{ plan: typeof sharedHostingPlans[0] }> = ({ plan }) =>
                 <SpecItem icon="fa-envelope" value={`${plan.specs.email}`} />
             </ul>
 
-            <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className={`w-full text-center mt-auto py-3 px-6 font-bold rounded-lg transition-all duration-300 text-white ${plan.isPopular ? 'bg-gradient-to-r from-accent-purple to-indigo-600 hover:opacity-90' : 'bg-white/10 hover:bg-white/20'}`}>
+            <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className={`w-full text-center mt-auto py-3 px-6 font-bold rounded-lg transition-all duration-300 text-white ${plan.isPopular ? 'bg-gradient-to-r from-accent-purple to-indigo-600 hover:opacity-90' : 'bg-white/10 hover:bg-white/20'}`}>
               Order Now
             </a>
         </div>
@@ -333,7 +333,7 @@ const WebHostingPage: React.FC = () => {
                                     We don't just host websites, we build them too! Join our Discord and open a ticket to get a stunning, high-performance website tailored to your brand, bundled with our reliable hosting for a complete online solution.
                                 </p>
                                 <a 
-                                    href="https://discord.gg/MGd8tERV" 
+                                    href="https://discord.gg/codeon" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="mt-8 inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105"

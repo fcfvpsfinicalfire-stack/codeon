@@ -34,7 +34,7 @@ const SimplePricingPlans: React.FC<SimplePricingPlansProps> = ({ setPage }) => {
             description: "Reliable and affordable scalable hosting with 24/7 uptime, blazingly support, and easy deployment.",
             features: ["SSD storage", "99.9% uptime", "24/7 support", "Advanced security", "Daily backups"],
             buttonText: "Order Now",
-            action: () => window.open('https://discord.gg/ZjJz8GKB', '_blank'),
+            action: () => window.open('https://discord.gg/codeon', '_blank'),
             bgImage: "url('https://i.postimg.cc/B6XzMKFZ/image-removebg-preview-(2).png')",
             isPrimary: false
         },
@@ -44,7 +44,7 @@ const SimplePricingPlans: React.FC<SimplePricingPlansProps> = ({ setPage }) => {
             description: "Scalable virtual private servers for your applications.",
             features: ["Full root access", "SSD storage", "99.9% uptime", "Multiple OS options", "Backup included"],
             buttonText: "Order Now",
-            action: () => window.open('https://discord.gg/ZjJz8GKB', '_blank'),
+            action: () => window.open('https://discord.gg/codeon', '_blank'),
             bgImage: "url('https://i.imgur.com/3RwNKMVH.png')",
             isPrimary: true
         }

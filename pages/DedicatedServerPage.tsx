@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import OperatingSystems from '../components/OperatingSystems';
 import AdvancedFeatures from '../components/AdvancedFeatures';
@@ -127,7 +126,7 @@ const PlanCard: React.FC<{ plan: typeof plans[0] }> = ({ plan }) => {
                     LKR {plan.price.toFixed(2)}
                     <span className="text-lg font-normal text-gray-500">/mo</span>
                 </p>
-                <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-colors flex items-center justify-center space-x-2">
+                <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-colors flex items-center justify-center space-x-2">
                     <span>Order Now</span>
                     <i className="fa-solid fa-arrow-right text-sm"></i>
                 </a>
@@ -167,48 +166,50 @@ const DedicatedServerPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Filters */}
                     <div className="space-y-12">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                            <section>
-                                <h2 className="text-lg font-semibold mb-4 text-gray-300">1. CPU Type</h2>
-                                <div className="flex flex-wrap gap-4">
-                                    {cpuTypes.map(cpu => (
-                                        <button 
-                                            key={cpu.id} 
-                                            onClick={() => setSelectedCpu(cpu.id)}
-                                            className={`flex items-center p-3 rounded-lg border-2 transition-all duration-300 w-full sm:w-auto ${selectedCpu === cpu.id ? 'bg-accent-purple/10 border-accent-purple' : 'bg-card-bg-solid border-gray-800 hover:border-gray-600'}`}
-                                        >
-                                            <img src={cpu.logo} alt={cpu.name} className="w-10 h-10 mr-4" />
-                                            <span className="font-bold text-white">{cpu.name}</span>
-                                        </button>
-                                    ))}
-                                </div>
-                            </section>
-                            <section>
-                                <h2 className="text-lg font-semibold mb-4 text-gray-300">2. Location</h2>
-                                <div className="flex flex-wrap gap-4">
-                                    {locations.map(loc => (
-                                        <button 
-                                            key={loc.id} 
-                                            onClick={() => setSelectedLocation(loc.id)}
-                                            className={`flex items-center p-3 rounded-lg border-2 transition-all duration-300 w-full sm:w-auto ${selectedLocation === loc.id ? 'bg-accent-purple/10 border-accent-purple' : 'bg-card-bg-solid border-gray-800 hover:border-gray-600'}`}
-                                        >
-                                            <span className="text-2xl mr-3">{loc.flag}</span>
-                                            <span className="font-bold text-white">{loc.name}</span>
-                                        </button>
-                                    ))}
-                                </div>
-                            </section>
-                        </div>
+                         {/* Location Filter */}
+                        <section>
+                            <h2 className="text-2xl font-bold mb-4 text-white"><span className="text-accent-purple">1.</span> Select Location</h2>
+                             <div className="flex flex-wrap gap-4">
+                                {locations.map(loc => (
+                                    <button 
+                                        key={loc.id} 
+                                        onClick={() => setSelectedLocation(loc.id)}
+                                        className={`flex items-center space-x-3 px-6 py-3 rounded-lg border-2 transition-all duration-300 font-semibold ${selectedLocation === loc.id ? 'bg-accent-purple border-accent-purple text-white' : 'bg-card-bg-solid border-gray-800 text-gray-300 hover:border-gray-600'}`}
+                                    >
+                                        <span className="text-2xl">{loc.flag}</span>
+                                        <span>{loc.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </section>
+                        
+                         {/* CPU Filter */}
+                        <section>
+                            <h2 className="text-2xl font-bold mb-4 text-white"><span className="text-accent-purple">2.</span> Choose CPU</h2>
+                            <div className="flex flex-wrap gap-4">
+                                {cpuTypes.map(cpu => (
+                                    <button 
+                                        key={cpu.id} 
+                                        onClick={() => setSelectedCpu(cpu.id)}
+                                        className={`flex items-center space-x-3 px-6 py-3 rounded-lg border-2 transition-all duration-300 font-semibold ${selectedCpu === cpu.id ? 'bg-accent-purple border-accent-purple text-white' : 'bg-card-bg-solid border-gray-800 text-gray-300 hover:border-gray-600'}`}
+                                    >
+                                        <img src={cpu.logo} alt={cpu.name} className="w-6 h-6" />
+                                        <span>{cpu.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </section>
 
-                        {/* Plans */}
-                        <section className="mt-12">
-                            <h2 className="text-lg font-semibold mb-4 text-gray-300">3. Choose Plan</h2>
+                        {/* Plans Grid */}
+                        <section>
+                            <h2 className="text-2xl font-bold mb-6 text-white"><span className="text-accent-purple">3.</span> Choose Your Server</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {filteredPlans.length > 0 ? (
                                     filteredPlans.map(plan => <PlanCard key={plan.id} plan={plan} />)
                                 ) : (
-                                    <div className="text-center py-12 bg-card-bg-solid rounded-lg lg:col-span-3">
-                                        <p className="text-gray-400">No plans available for this configuration.</p>
+                                    <div className="text-center py-12 bg-card-bg-solid rounded-lg md:col-span-2 lg:col-span-3">
+                                        <i className="fa-solid fa-ghost text-4xl text-gray-500 mb-4"></i>
+                                        <p className="text-gray-400">No servers available for this configuration.</p>
                                     </div>
                                 )}
                             </div>
@@ -216,11 +217,12 @@ const DedicatedServerPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                 <OperatingSystems />
-                 <AdvancedFeatures />
-                 <FAQ />
-                 <JoinDiscord />
+                <OperatingSystems />
+                <AdvancedFeatures />
+                <FAQ />
+                <JoinDiscord />
             </div>
         </>
     );

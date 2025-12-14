@@ -134,7 +134,7 @@ const PlanCard: React.FC<{ plan: typeof budgetPlans[0] }> = ({ plan }) => {
                 <SpecItem icon="fa-wifi" label="Bandwidth" value={plan.specs.bandwidth} />
             </ul>
 
-            <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className={`w-full text-center mt-auto py-3 px-6 font-bold rounded-lg transition-all duration-300 ${plan.isPopular ? 'bg-discord-blue text-white hover:opacity-90' : 'bg-white/10 text-white hover:bg-white/20'}`}>
+            <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className={`w-full text-center mt-auto py-3 px-6 font-bold rounded-lg transition-all duration-300 ${plan.isPopular ? 'bg-discord-blue text-white hover:opacity-90' : 'bg-white/10 text-white hover:bg-white/20'}`}>
               Get Started
             </a>
         </div>
@@ -252,7 +252,7 @@ const DiscordBotHostingPage: React.FC = () => {
                                  Have a unique idea? Our expert developers can build a custom Discord bot tailored to your community's specific needs. Join our Discord and open a ticket to get a quote!
                              </p>
                              <a 
-                                href="https://discord.gg/MGd8tERV" 
+                                href="https://discord.gg/codeon" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 className="mt-8 inline-flex items-center space-x-2 bg-gradient-to-r from-discord-blue to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105"

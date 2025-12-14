@@ -50,6 +50,7 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
           <button onClick={() => setPage('dedicated')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Dedicated</button>
           <button onClick={() => setPage('discord')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Discord Bot</button>
           <button onClick={() => setPage('webhosting')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">WebHosting</button>
+          <button onClick={() => setPage('v2ray')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">V2Ray Hosting</button>
           <button onClick={() => setPage('contact')} className="font-medium text-gray-300 hover:text-white transition-colors duration-300">Contact</button>
         </nav>
 
@@ -76,6 +77,7 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
           <button onClick={() => { setPage('dedicated'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Dedicated</button>
           <button onClick={() => { setPage('discord'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Discord Bot</button>
           <button onClick={() => { setPage('webhosting'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">WebHosting</button>
+          <button onClick={() => { setPage('v2ray'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">V2Ray Hosting</button>
           <button onClick={() => { setPage('contact'); setIsMenuOpen(false); }} className="block w-full text-left py-2 text-gray-300 hover:text-white">Contact</button>
           <div className="border-t border-white/10 pt-4 mt-4">
              <a href="https://ctrl.codeon.codes" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-brand-cyan to-brand-magenta text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity">

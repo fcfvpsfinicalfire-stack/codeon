@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Page } from '../App';
 
@@ -10,22 +11,25 @@ const services = [
     icon: 'fa-gamepad',
     title: 'Game Servers',
     description: 'High-performance hosting for your favorite games, featuring low latency, instant setup, and powerful control panels.',
-    accentClass: 'from-brand-cyan/20',
     page: 'pricing' as Page,
   },
   {
     icon: 'fa-globe',
     title: 'Web Hosting',
     description: 'Reliable and affordable hosting for your websites. Blazing-fast with NVMe storage and free SSL certificates.',
-    accentClass: 'from-sky-600/20',
     page: 'webhosting' as Page,
   },
   {
     icon: 'fa-cloud',
     title: 'Cloud & Dedicated',
     description: 'Scalable Cloud VPS and powerful Dedicated Servers for demanding applications, with full root access.',
-    accentClass: 'from-green-600/20',
     page: 'vps' as Page,
+  },
+   {
+    icon: 'fa-user-shield',
+    title: 'V2Ray Hosting',
+    description: 'Secure, private, and high-speed V2Ray hosting to bypass censorship and protect your online identity.',
+    page: 'v2ray' as Page,
   }
 ];
 
@@ -58,7 +62,7 @@ const SolutionsShowcase: React.FC<ServiceShowcaseProps> = ({ setPage }) => {
                     From intense gaming sessions to mission-critical applications, we provide the power and reliability you need to succeed.
                 </p>
             </div>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {services.map((service, index) => (
                     <ServiceShowcaseCard key={index} service={service} setPage={setPage} />
                 ))}

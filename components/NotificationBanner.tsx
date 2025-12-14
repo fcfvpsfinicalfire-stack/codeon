@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 
 const NotificationBanner: React.FC = () => {
@@ -25,7 +24,7 @@ const NotificationBanner: React.FC = () => {
 
     return (
         <a 
-            href="https://discord.gg/MGd8tERV" 
+            href="https://discord.gg/codeon" 
             target="_blank" 
             rel="noopener noreferrer"
             className="block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-black animate-fade-in relative z-40 group"
@@ -33,7 +32,7 @@ const NotificationBanner: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
                 <div className="flex-grow flex items-center justify-center gap-3">
                     <p className="text-sm sm:text-base font-bold text-center">
-                        🎉 BLACK FRIDAY SALE IS LIVE! GET UP TO 50% OFF ON ALL HOSTING PLANS. LIMITED TIME OFFER!
+                        🎉 All orders are processed via Discord! Join our server to place your order.
                     </p>
                 </div>
                 <button 

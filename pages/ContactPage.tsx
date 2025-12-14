@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 const contactMethods = [
     { icon: 'fa-solid fa-envelope', title: 'Email Us', line1: 'Send us an email anytime', line2: 'support@watchx.com', href: 'mailto:support@watchx.com' },
     { icon: 'fa-solid fa-phone', title: 'Call Us', line1: 'Mon-Fri from 9am to 6pm', line2: '+94 76 123 4567' },
-    { icon: 'fa-brands fa-discord', title: 'Discord', line1: 'Join our community', line2: 'discord.watchx.net', href: 'https://discord.gg/ZjJz8GKB' },
+    { icon: 'fa-brands fa-discord', title: 'Discord', line1: 'Join our community', line2: 'discord.watchx.net', href: 'https://discord.gg/codeon' },
     { icon: 'fa-solid fa-clock', title: 'Working Hours', line1: 'Our schedule', line2: 'Mon - Sun: 9am - 11pm\nTech Support: 24/7' },
     { icon: 'fa-solid fa-comment-dots', title: 'Live Chat', line1: 'Get instant assistance', line2: '▶ Start a conversation', href: '#', isAction: true },
     { icon: 'fa-solid fa-gamepad', title: 'Game Support', line1: 'Game server assistance', line2: 'View supported games', href: '#', isAction: true },

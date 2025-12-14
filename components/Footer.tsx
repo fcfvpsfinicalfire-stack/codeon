@@ -51,6 +51,7 @@ const Footer: React.FC<FooterProps> = ({ setPage }) => {
                         <FooterLink onClick={() => setPage('dedicated')} text="Dedicated Servers" />
                         <FooterLink onClick={() => setPage('webhosting')} text="Web Hosting" />
                         <FooterLink onClick={() => setPage('discord')} text="Discord Bot Hosting" />
+                        <FooterLink onClick={() => setPage('v2ray')} text="V2Ray Hosting" />
                     </ul>
                 </div>
 

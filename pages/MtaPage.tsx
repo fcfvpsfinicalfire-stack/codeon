@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const features = [
@@ -22,7 +23,7 @@ const MtaPage: React.FC = () => {
                             Experience lightning-fast performance, unbeatable reliability, and 24/7 support for all your favorite games.
                         </p>
                         <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                            <a href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+                            <a href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
                                 <span>Get started</span>
                                 <i className="fa-solid fa-arrow-right"></i>
                             </a>

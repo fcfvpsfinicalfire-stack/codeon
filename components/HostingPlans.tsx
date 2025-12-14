@@ -87,7 +87,7 @@ const PlanCard: React.FC<{ plan: MinecraftPlan }> = ({ plan }) => {
                 <span className="text-lg font-normal text-gray-500">/mo</span>
             </p>
             <a
-              href="https://discord.gg/ZjJz8GKB" target="_blank" rel="noopener noreferrer"
+              href="https://discord.gg/codeon" target="_blank" rel="noopener noreferrer"
               className="w-full mt-6 bg-green-600/90 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center space-x-2">
                 <span>Order Now</span>
                 <i className="fa-solid fa-arrow-right text-sm"></i>

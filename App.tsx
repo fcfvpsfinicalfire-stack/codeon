@@ -12,6 +12,7 @@ import DiscordBotHostingPage from './pages/DiscordBotHostingPage';
 import WebHostingPage from './pages/WebHostingPage';
 import GameServersPage from './pages/GameServersPage';
 import ContactPage from './pages/ContactPage';
+import V2RayPage from './pages/V2RayPage';
 
 // Homepage sections
 import LoadingScreen from './components/LoadingScreen';
@@ -40,7 +41,7 @@ export interface Plan {
   [key: string]: any; // Allow other properties
 }
 
-export type Page = 'home' | 'pricing' | 'vps' | 'dedicated' | 'discord' | 'webhosting' | 'gameservers' | 'contact';
+export type Page = 'home' | 'pricing' | 'vps' | 'dedicated' | 'discord' | 'webhosting' | 'gameservers' | 'contact' | 'v2ray';
 
 const App: React.FC = () => {
   const [page, setPage] = useState<Page>('home');
@@ -110,6 +111,7 @@ const App: React.FC = () => {
         {page === 'dedicated' && <DedicatedServerPage />}
         {page === 'discord' && <DiscordBotHostingPage />}
         {page === 'webhosting' && <WebHostingPage />}
+        {page === 'v2ray' && <V2RayPage />}
         {page === 'contact' && <ContactPage />}
       </main>
 
