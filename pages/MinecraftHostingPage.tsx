@@ -14,17 +14,17 @@ export default function MinecraftHostingPage({ onOrderPlan }: MinecraftHostingPa
 
   const plans = [
     { ram: '1GB', cpu: '1 Core', ssd: '10GB NVMe SSD', price: '300.00' },
-    { ram: '2GB', cpu: '1.5 Core', ssd: '10GB NVMe SSD', price: '360.00' },
-    { ram: '4GB', cpu: '1.5 Core', ssd: '20GB NVMe SSD', price: '400.00' },
-    { ram: '6GB', cpu: '1.5 Cores', ssd: '20GB NVMe SSD', price: '600.00' },
-    { ram: '8GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '800.00' },
-    { ram: '10GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '1400.00' },
-    { ram: '12GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '2000.00' },
-    { ram: '16GB', cpu: '4 Cores', ssd: '40GB NVMe SSD', price: '2800.00' },
-    { ram: '20GB', cpu: '4 Cores', ssd: '40GB NVMe SSD', price: '4000.00' },
-    { ram: '24GB', cpu: '6 Cores', ssd: '40GB NVMe SSD', price: '5800.00' },
-    { ram: '32GB', cpu: '8 Cores', ssd: '40GB NVMe SSD', price: '8000.00' },
-    { ram: '64GB', cpu: '10 Cores', ssd: '50GB NVMe SSD', price: '18000.00' },
+    { ram: '2GB', cpu: '1.5 Core', ssd: '10GB NVMe SSD', price: '700.00' },
+    { ram: '4GB', cpu: '1.5 Core', ssd: '20GB NVMe SSD', price: '1400.00' },
+    { ram: '6GB', cpu: '1.5 Cores', ssd: '20GB NVMe SSD', price: '1800.00' },
+    { ram: '8GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '2200.00' },
+    { ram: '10GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '2800.00' },
+    { ram: '12GB', cpu: '2 Cores', ssd: '30GB NVMe SSD', price: '3200.00' },
+    { ram: '16GB', cpu: '4 Cores', ssd: '40GB NVMe SSD', price: '3600.00' },
+    { ram: '20GB', cpu: '4 Cores', ssd: '40GB NVMe SSD', price: '4200.00' },
+    { ram: '24GB', cpu: '6 Cores', ssd: '40GB NVMe SSD', price: '5400.00' },
+    { ram: '32GB', cpu: '8 Cores', ssd: '40GB NVMe SSD', price: '8200.00' },
+    { ram: '64GB', cpu: '10 Cores', ssd: '50GB NVMe SSD', price: '16000.00' },
   ];
 
   const faqs = [

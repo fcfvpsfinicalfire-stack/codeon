@@ -67,14 +67,14 @@ const PartnersPage: React.FC = () => {
     },
     {
       name: 'Cryingcraft',
-      category: 'STREAMER',
+      category: 'CONTENT CREATOR',
       desc: 'Creating immersive multiplayer experiences and high-energy roleplay that brings communities together.',
       image: 'https://i.postimg.cc/Fssy6rPb/IMG-20251212-WA0235.jpg',
       accent: 'bg-blue-500',
     },
     {
       name: 'DR MAX WAVE',
-      category: 'COMMUNITY',
+      category: 'STREAMER',
       desc: "Dedicated to showcasing the very best of Minecraft server culture and hosting excellence.",
       image: 'https://i.postimg.cc/G3ySF8dt/my-new-logo-upscayl-3x-realesrgan-x4plus-anime.png',
       accent: 'bg-emerald-500',

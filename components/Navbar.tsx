@@ -67,12 +67,12 @@ const Navbar: React.FC<NavbarProps> = ({ onViewChange, currentView }) => {
                 </button>
 
                 {isGamesOpen && (
-                  <div className="absolute top-16 -left-12 w-[720px] bg-[#111827] border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-6 animate-in fade-in slide-in-from-top-2 duration-200 z-[60] backdrop-blur-xl">
-                    <div className="grid grid-cols-3 gap-x-6 gap-y-4">
+                  <div className="absolute top-16 -left-12 w-[720px] bg-[#0b0f19] border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-6 animate-in fade-in slide-in-from-top-2 duration-200 z-[60] backdrop-blur-xl">
+                    <div className="grid grid-cols-3 gap-3">
                       {gamesList.map((game, idx) => (
                         <div 
                           key={idx} 
-                          className="flex items-center space-x-4 group/item cursor-pointer hover:bg-white/5 p-3 rounded-xl transition-all duration-300 hover:translate-x-1"
+                          className="flex items-center space-x-3 bg-slate-800/20 border border-white/5 p-3 rounded-2xl cursor-pointer hover:bg-slate-800/40 hover:border-blue-500/30 transition-all duration-300 group/item hover:translate-y-[-2px]"
                           onClick={() => {
                             if (game.name === 'Minecraft') onViewChange('minecraft');
                             else if (game.name === 'Rust') onViewChange('rust');
@@ -81,12 +81,12 @@ const Navbar: React.FC<NavbarProps> = ({ onViewChange, currentView }) => {
                             setIsGamesOpen(false);
                           }}
                         >
-                          <div className={`w-12 h-12 ${game.bgColor} border ${game.borderColor} rounded-xl flex items-center justify-center text-2xl shadow-inner group-hover/item:scale-110 transition-transform duration-300`}>
+                          <div className={`w-11 h-11 ${game.bgColor} border ${game.borderColor} rounded-xl flex items-center justify-center text-xl shadow-inner group-hover/item:scale-105 transition-transform duration-300`}>
                             {game.icon}
                           </div>
                           <div className="flex flex-col">
-                            <h4 className="text-white font-extrabold text-sm group-hover/item:text-blue-400 transition-colors leading-tight">{game.name}</h4>
-                            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wide mt-0.5">
+                            <h4 className="text-white font-bold text-sm group-hover/item:text-blue-400 transition-colors leading-tight">{game.name}</h4>
+                            <p className="text-slate-500 text-[10px] font-bold mt-0.5">
                               Starting at <span className="text-white">{game.price}</span>
                             </p>
                           </div>
@@ -94,9 +94,9 @@ const Navbar: React.FC<NavbarProps> = ({ onViewChange, currentView }) => {
                       ))}
                     </div>
                     {/* View All Footer */}
-                    <div className="mt-6 pt-4 border-t border-white/5 flex justify-end">
-                       <button className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] hover:text-blue-400 transition-colors">
-                         Explore All 60+ Games →
+                    <div className="mt-4 pt-4 border-t border-white/5 flex justify-end">
+                       <button className="text-[10px] font-black text-blue-500 uppercase tracking-widest hover:text-blue-400 transition-colors">
+                         View All 60+ Games →
                        </button>
                     </div>
                   </div>
@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ onViewChange, currentView }) => {
                 </button>
 
                 {isMoreOpen && (
-                  <div className="absolute top-16 left-0 w-64 bg-[#111827] border border-white/10 rounded-2xl shadow-2xl p-2 animate-in fade-in slide-in-from-top-2 duration-200 z-[60] backdrop-blur-xl">
+                  <div className="absolute top-16 left-0 w-64 bg-[#0b0f19] border border-white/10 rounded-2xl shadow-2xl p-2 animate-in fade-in slide-in-from-top-2 duration-200 z-[60] backdrop-blur-xl">
                     <div className="flex flex-col space-y-0.5">
                       {moreLinks.map((link, idx) => (
                         <div 
@@ -136,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = ({ onViewChange, currentView }) => {
                           <div className={`${link.color} transition-colors group-hover/link:text-white`}>
                             {link.icon}
                           </div>
-                          <span className={`text-xs font-black uppercase tracking-widest transition-colors ${link.name === 'Multicraft Knowledgebase' ? 'text-blue-500 group-hover/link:text-blue-400' : 'text-slate-400 group-hover/link:text-white'}`}>
+                          <span className="text-xs font-black uppercase tracking-widest text-slate-400 group-hover/link:text-white transition-colors">
                             {link.name}
                           </span>
                         </div>
