@@ -2,84 +2,184 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Partners from './components/Partners';
-import FloatingAction from './components/FloatingAction';
-import ExclusiveFeatures from './components/ExclusiveFeatures';
-import HostingResources from './components/HostingResources';
-import TestimonialsSection from './components/TestimonialsSection';
-import FAQSection from './components/FAQSection';
-import DiscordBanner from './components/DiscordBanner';
+import PricingSection from './components/PricingSection';
+import OrderModal from './components/OrderModal';
 import Footer from './components/Footer';
-import MinecraftHostingPage from './pages/MinecraftHostingPage';
-import CheckoutPage from './pages/CheckoutPage';
-import RustHostingPage from './pages/RustHostingPage';
-import ArkHostingPage from './pages/ArkHostingPage';
-import FiveMHostingPage from './pages/FiveMHostingPage';
-import ArticlePage from './pages/ArticlePage';
-import FAQPage from './pages/FAQPage';
-import ControlPage from './pages/ControlPage';
-import HardwareLocationsPage from './pages/HardwareLocationsPage';
-import PartnersPage from './pages/PartnersPage';
-import KnowledgebasePage from './pages/KnowledgebasePage';
-import BlogPage from './pages/BlogPage';
+import ChatBot from './components/ChatBot';
+import MouseParticles from './components/MouseParticles';
+import CartDrawer from './components/CartDrawer';
+import PanelShowcase from './components/PanelShowcase';
+import TeamSection from './components/TeamSection';
+import LocationSelector from './components/LocationSelector';
+import LoadingScreen from './components/LoadingScreen';
+import LoginScreen from './components/LoginScreen';
+import PartnerToast from './components/PartnerToast';
+import UpdateBanner from './components/UpdateBanner';
+import RamCalculator from './components/RamCalculator';
+import FeaturesGrid from './components/FeaturesGrid';
+import FAQSection from './components/FAQSection';
+import PartnersSection from './components/PartnersSection';
+import { Plan, SiteNotification, BillingCycle } from './types';
+
+export type Page = 'home' | 'team' | 'minecraft' | 'rust' | 'ark' | 'mta' | 'nodejs' | 'cloud' | 'dedicated' | 'partners';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'home' | 'minecraft' | 'checkout' | 'rust' | 'ark' | 'fivem' | 'article' | 'faq' | 'control' | 'hardware' | 'partners' | 'knowledgebase' | 'blog'>('home');
-  const [selectedPlan, setSelectedPlan] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [page, setPage] = useState<Page>('home');
+  const [cart, setCart] = useState<Plan[]>([]);
+  const [currency, setCurrency] = useState<'LKR' | 'EUR'>('LKR');
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('MONTHLY');
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [notifications, setNotifications] = useState<SiteNotification[]>([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [view]);
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    const auth = localStorage.getItem('codeon-auth-token');
+    if (auth) {
+      setIsLoggedIn(true);
+    }
 
-  const handleNavigateToCheckout = (plan: any) => {
-    setSelectedPlan(plan);
-    setView('checkout');
+    const storedNotifs = JSON.parse(localStorage.getItem('codeon-notifs') || '[]');
+    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+    const validNotifs = storedNotifs.filter((n: SiteNotification) => n.timestamp > thirtyDaysAgo);
+    setNotifications(validNotifs);
+    localStorage.setItem('codeon-notifs', JSON.stringify(validNotifs));
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const addNotification = (message: string) => {
+    const newNotif: SiteNotification = {
+      id: Math.random().toString(36).substr(2, 9),
+      message,
+      timestamp: Date.now(),
+      type: 'order'
+    };
+    const updated = [newNotif, ...notifications];
+    setNotifications(updated);
+    localStorage.setItem('codeon-notifs', JSON.stringify(updated));
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem('codeon-auth-token', 'valid-' + Date.now());
+  };
+
+  const addToCart = (plan: Plan) => {
+    setCart(prev => [...prev, { ...plan, id: `${plan.id}-${Date.now()}` }]);
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (index: number) => {
+    setCart(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const clearCart = () => setCart([]);
+
+  if (isLoading) return <LoadingScreen />;
+  if (!isLoggedIn) return <LoginScreen onLogin={handleLoginSuccess} />;
+
+  const renderContent = () => {
+    switch (page) {
+      case 'team': return <TeamSection />;
+      case 'partners': return <PartnersSection />;
+      case 'minecraft':
+      case 'rust':
+      case 'ark':
+      case 'mta':
+      case 'nodejs':
+      case 'cloud':
+      case 'dedicated':
+        return (
+          <div className="pt-32 pb-32 min-h-screen">
+            <PricingSection 
+              onAddToCart={addToCart} 
+              forcedCategory={page.toUpperCase() as any} 
+              currency={currency}
+              billingCycle={billingCycle}
+              setBillingCycle={setBillingCycle}
+            />
+          </div>
+        );
+      default:
+        return (
+          <>
+            <Hero onAddToCart={addToCart} />
+            <UpdateBanner />
+            <FeaturesGrid />
+            <div id="pricing" className="py-20">
+              <PricingSection 
+                onAddToCart={addToCart} 
+                currency={currency} 
+                billingCycle={billingCycle}
+                setBillingCycle={setBillingCycle}
+              />
+            </div>
+            <RamCalculator onOrder={addToCart} currency={currency} />
+            <LocationSelector />
+            <PanelShowcase />
+            <FAQSection />
+            <TeamSection />
+          </>
+        );
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-[#0f172a]">
-      <div className="absolute top-0 left-0 w-full h-[800px] custom-gradient -z-10" />
+    <div 
+      className="min-h-screen bg-[#030712] selection:bg-blue-500/30 text-white relative font-sans overflow-x-hidden"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(3, 7, 18, 0.95), rgba(3, 7, 18, 0.98)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000')`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center'
+      }}
+    >
+      <MouseParticles />
+      <Navbar 
+        cartCount={cart.length} 
+        onOpenCart={() => setIsCartOpen(true)} 
+        setPage={setPage} 
+        currentPage={page}
+        currency={currency}
+        setCurrency={setCurrency}
+        notifications={notifications}
+      />
       
-      <div className="bg-blue-600/90 py-2 text-center text-xs font-semibold tracking-wide uppercase z-50">
-        🚀 New: AI-Powered Game Recommendations launched! <button className="underline ml-2 hover:text-white/80">Try it now</button>
-      </div>
-
-      <Navbar onViewChange={setView} currentView={view} />
-      
-      <main className="flex-grow">
-        {view === 'home' && (
-          <>
-            <Hero />
-            <ExclusiveFeatures />
-            <HostingResources onViewChange={setView} />
-            <Partners />
-            <TestimonialsSection />
-            <FAQSection onViewChange={setView} />
-            <DiscordBanner />
-          </>
-        )}
-        {view === 'minecraft' && <MinecraftHostingPage onOrderPlan={handleNavigateToCheckout} />}
-        {view === 'checkout' && <CheckoutPage plan={selectedPlan} onBack={() => {
-          // Dynamic back navigation based on plan type
-          if (selectedPlan?.gameType === 'rust') setView('rust');
-          else if (selectedPlan?.gameType === 'ark') setView('ark');
-          else if (selectedPlan?.gameType === 'fivem') setView('fivem');
-          else setView('minecraft');
-        }} />}
-        {view === 'rust' && <RustHostingPage onOrderPlan={handleNavigateToCheckout} />}
-        {view === 'ark' && <ArkHostingPage onOrderPlan={handleNavigateToCheckout} />}
-        {view === 'fivem' && <FiveMHostingPage onOrderPlan={handleNavigateToCheckout} />}
-        {view === 'article' && <ArticlePage />}
-        {view === 'faq' && <FAQPage />}
-        {view === 'control' && <ControlPage />}
-        {view === 'hardware' && <HardwareLocationsPage />}
-        {view === 'partners' && <PartnersPage />}
-        {view === 'knowledgebase' && <KnowledgebasePage />}
-        {view === 'blog' && <BlogPage />}
+      <main className="animate-in fade-in duration-1000">
+        {renderContent()}
       </main>
 
       <Footer />
-      <FloatingAction />
+      
+      <CartDrawer 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
+        cart={cart}
+        currency={currency}
+        billingCycle={billingCycle}
+        onRemove={removeFromCart}
+        onCheckout={() => {
+          setIsCartOpen(false);
+          setIsOrderModalOpen(true);
+        }}
+      />
+
+      {isOrderModalOpen && cart.length > 0 && (
+        <OrderModal 
+          cart={cart} 
+          currency={currency}
+          billingCycle={billingCycle}
+          onClose={() => setIsOrderModalOpen(false)}
+          onClearCart={clearCart}
+          onOrderSuccess={() => addNotification("Order Placed: Manual review starting now.")}
+        />
+      )}
+
+      <ChatBot />
+      <PartnerToast />
     </div>
   );
 };
