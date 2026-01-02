@@ -1,121 +1,85 @@
 
-
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Partners from './components/Partners';
+import FloatingAction from './components/FloatingAction';
+import ExclusiveFeatures from './components/ExclusiveFeatures';
+import HostingResources from './components/HostingResources';
+import TestimonialsSection from './components/TestimonialsSection';
+import FAQSection from './components/FAQSection';
+import DiscordBanner from './components/DiscordBanner';
 import Footer from './components/Footer';
-
-// Page components
-import PricingPage from './pages/PricingPage';
-import VPSPage from './pages/VPSPage';
-import DedicatedServerPage from './pages/DedicatedServerPage';
-import DiscordBotHostingPage from './pages/DiscordBotHostingPage';
-import WebHostingPage from './pages/WebHostingPage';
-import GameServersPage from './pages/GameServersPage';
-import ContactPage from './pages/ContactPage';
-import V2RayPage from './pages/V2RayPage';
-
-// Homepage sections
-import LoadingScreen from './components/LoadingScreen';
-import NotificationBanner from './components/NotificationBanner';
-import MainHero from './components/MainHero';
-import TrustBadges from './components/TrustBadges';
-import SolutionsShowcase from './components/SolutionsShowcase';
-import WhyChooseUs from './components/WhyChooseUs';
-import OurPlatform from './components/OurPlatform';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
-import JoinDiscord from './components/JoinDiscord';
-import AdvancedFeatures from './components/AdvancedFeatures';
-import Locations from './components/Locations';
-import SimplePricingPlans from './components/SimplePricingPlans';
-import GrowthMetrics from './components/GrowthMetrics';
-
-
-export interface Plan {
-  name: string;
-  price: string;
-  ram?: string;
-  cpu?: string;
-  ssd?: string;
-  paypalLink?: string;
-  [key: string]: any; // Allow other properties
-}
-
-export type Page = 'home' | 'pricing' | 'vps' | 'dedicated' | 'discord' | 'webhosting' | 'gameservers' | 'contact' | 'v2ray';
+import MinecraftHostingPage from './pages/MinecraftHostingPage';
+import CheckoutPage from './pages/CheckoutPage';
+import RustHostingPage from './pages/RustHostingPage';
+import ArkHostingPage from './pages/ArkHostingPage';
+import FiveMHostingPage from './pages/FiveMHostingPage';
+import ArticlePage from './pages/ArticlePage';
+import FAQPage from './pages/FAQPage';
+import ControlPage from './pages/ControlPage';
+import HardwareLocationsPage from './pages/HardwareLocationsPage';
+import PartnersPage from './pages/PartnersPage';
+import KnowledgebasePage from './pages/KnowledgebasePage';
+import BlogPage from './pages/BlogPage';
 
 const App: React.FC = () => {
-  const [page, setPage] = useState<Page>('home');
-  const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState<'home' | 'minecraft' | 'checkout' | 'rust' | 'ark' | 'fivem' | 'article' | 'faq' | 'control' | 'hardware' | 'partners' | 'knowledgebase' | 'blog'>('home');
+  const [selectedPlan, setSelectedPlan] = useState<any>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Simulate loading for 2.5 seconds
+    window.scrollTo(0, 0);
+  }, [view]);
 
-    return () => clearTimeout(timer);
-  }, []);
-  
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  const HomePageContent: React.FC = () => (
-    <>
-      <MainHero setPage={setPage} />
-      <TrustBadges />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <SolutionsShowcase setPage={setPage} />
-      </div>
-      <WhyChooseUs />
-      <OurPlatform />
-      <GrowthMetrics />
-      <AdvancedFeatures />
-      <Locations />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <SimplePricingPlans setPage={setPage} />
-      </div>
-      <Testimonials />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <FAQ />
-        <JoinDiscord />
-      </div>
-    </>
-  );
+  const handleNavigateToCheckout = (plan: any) => {
+    setSelectedPlan(plan);
+    setView('checkout');
+  };
 
   return (
-    <div className="bg-dark-bg text-white min-h-screen font-sans animate-fade-in relative overflow-x-hidden">
-        <div className="absolute inset-0 z-0 opacity-20 animate-plexus-pan"
-            style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='https://i.postimg.cc/XqrZ3t7H/image.png' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%2317182B' fill-opacity='0.4'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7-7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-        ></div>
-        <div className="absolute inset-0 z-0 opacity-50 animate-grid-pan"
-            style={{
-                backgroundImage: `
-                    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-                `,
-                backgroundSize: '120px 120px',
-            }}
-      ></div>
-
-      <Header setPage={setPage} />
-      <NotificationBanner />
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-[#0f172a]">
+      <div className="absolute top-0 left-0 w-full h-[800px] custom-gradient -z-10" />
       
-      <main className="relative z-10">
-        {page === 'home' && <HomePageContent />}
-        {page === 'pricing' && <PricingPage />}
-        {page === 'gameservers' && <GameServersPage />}
-        {page === 'vps' && <VPSPage />}
-        {page === 'dedicated' && <DedicatedServerPage />}
-        {page === 'discord' && <DiscordBotHostingPage />}
-        {page === 'webhosting' && <WebHostingPage />}
-        {page === 'v2ray' && <V2RayPage />}
-        {page === 'contact' && <ContactPage />}
+      <div className="bg-blue-600/90 py-2 text-center text-xs font-semibold tracking-wide uppercase z-50">
+        🚀 New: AI-Powered Game Recommendations launched! <button className="underline ml-2 hover:text-white/80">Try it now</button>
+      </div>
+
+      <Navbar onViewChange={setView} currentView={view} />
+      
+      <main className="flex-grow">
+        {view === 'home' && (
+          <>
+            <Hero />
+            <ExclusiveFeatures />
+            <HostingResources onViewChange={setView} />
+            <Partners />
+            <TestimonialsSection />
+            <FAQSection onViewChange={setView} />
+            <DiscordBanner />
+          </>
+        )}
+        {view === 'minecraft' && <MinecraftHostingPage onOrderPlan={handleNavigateToCheckout} />}
+        {view === 'checkout' && <CheckoutPage plan={selectedPlan} onBack={() => {
+          // Dynamic back navigation based on plan type
+          if (selectedPlan?.gameType === 'rust') setView('rust');
+          else if (selectedPlan?.gameType === 'ark') setView('ark');
+          else if (selectedPlan?.gameType === 'fivem') setView('fivem');
+          else setView('minecraft');
+        }} />}
+        {view === 'rust' && <RustHostingPage onOrderPlan={handleNavigateToCheckout} />}
+        {view === 'ark' && <ArkHostingPage onOrderPlan={handleNavigateToCheckout} />}
+        {view === 'fivem' && <FiveMHostingPage onOrderPlan={handleNavigateToCheckout} />}
+        {view === 'article' && <ArticlePage />}
+        {view === 'faq' && <FAQPage />}
+        {view === 'control' && <ControlPage />}
+        {view === 'hardware' && <HardwareLocationsPage />}
+        {view === 'partners' && <PartnersPage />}
+        {view === 'knowledgebase' && <KnowledgebasePage />}
+        {view === 'blog' && <BlogPage />}
       </main>
 
-      <Footer setPage={setPage}/>
+      <Footer />
+      <FloatingAction />
     </div>
   );
 };
