@@ -1,21 +1,24 @@
 
-import { Plan, FAQItem, Feature, Partner } from './types';
+import { Plan, FAQItem, Feature, Partner, TeamMember } from './types';
 
 export const LKR_TO_EUR = 0.0031; 
 export const DISCOUNT_PERCENT = 26;
 export const NEW_YEAR_COUPON = "CODEON2026";
+export const DISCORD_URL = "https://discord.gg/VveAFBQvtZ";
 
 export const GAMES = ["Minecraft", "ARK", "Rust", "Multi Theft Auto", "NodeJS"];
 
 export const DISCORD_CONFIG = {
   clientId: '1434212125194063942',
-  clientSecret: 'kUSr9KjGjY43LaLuMXHlaCAJoSL3sdk7'
+  clientSecret: 'p2dhx8KTLkELnA8lMGdfw6lBkVnDR6l4',
+  redirectUri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
+  scopes: 'identify'
 };
 
 const RAM_OPTIONS = [1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64];
 const BASE_PRICE_LKR = 350; 
 
-export const DIRT_BLOCK_URL = "https://image2url.com/r2/default/images/1767360297993-31645f26-2dd5-4bd1-a225-1565a07e9b8b.png";
+export const DIRT_BLOCK_URL = "https://image2url.com/r2/default/images/1767434241004-812d7ac6-c307-48f3-a5ba-5bc7d4659610.png";
 
 export const PLANS: Plan[] = [
   ...RAM_OPTIONS.map((ram) => ({
@@ -52,19 +55,19 @@ export const PLANS: Plan[] = [
 ];
 
 export const LOCATIONS = [
-  { id: 'SG', name: 'Singapore, AS', flag: '🇸🇬', domain: 'sg.codeon.codes', ping: '42 ms', status: 'Best', stock: 100, datacenter: 'SGNS CODEON DATACENTER', city: 'Jurong West, Singapore' },
-  { id: 'UK', name: 'London, UK', flag: '🇬🇧', domain: 'uk.codeon.codes', ping: '184 ms', status: 'Maintenance', stock: 0, datacenter: 'Equinix LD8', city: 'London' },
-  { id: 'US', name: 'New York, US', flag: '🇺🇸', domain: 'us.codeon.codes', ping: '240 ms', status: 'Full', stock: 0, datacenter: 'DigitalOcean NYC3', city: 'New York City' },
-  { id: 'JP', name: 'Tokyo, JP', flag: '🇯🇵', domain: 'jp.codeon.codes', ping: '95 ms', status: 'Queued', stock: 0, datacenter: 'Linode JP-02', city: 'Tokyo' }
+  { id: 'SG', name: 'SINGAPORE, AS', flag: 'SG', domain: 'sg.codeon.codes', ping: '42 ms', status: 'Best', stock: 100, datacenter: 'SGNS CODEON DATACENTER', city: 'Jurong West, Singapore' },
+  { id: 'UK', name: 'LONDON, UK', flag: 'GB', domain: 'uk.codeon.codes', ping: '184 ms', status: 'Out of Stock', stock: 0, datacenter: 'Equinix LD8', city: 'London' },
+  { id: 'US', name: 'NEW YORK, US', flag: 'US', domain: 'us.codeon.codes', ping: '240 ms', status: 'Out of Stock', stock: 0, datacenter: 'DigitalOcean NYC3', city: 'New York City' },
+  { id: 'JP', name: 'TOKYO, JP', flag: 'JP', domain: 'jp.codeon.codes', ping: '95 ms', status: 'Out of Stock', stock: 0, datacenter: 'Linode JP-02', city: 'Tokyo' }
 ];
 
 export const FEATURES: Feature[] = [
-  { title: 'AMD Ryzen CPUs', description: 'Experience blazing-fast performance with Ryzen 7 & 9 series processors clocked at up to 5.7GHz.', icon: '⚡', color: 'blue' },
-  { title: 'NVMe SSD Storage', description: 'Low-latency disks ensure your server chunks and plugins load instantly without lag.', icon: '🚀', color: 'cyan' },
-  { title: '1Tbps DDoS Shield', description: 'Stay online during the heaviest attacks with our advanced enterprise-grade filtration systems.', icon: '🛡️', color: 'purple' },
-  { title: 'Singapore Premium', description: 'The lowest latency for South Asia & SE Asia, powered by high-tier bandwidth partners.', icon: '🇸🇬', color: 'green' },
-  { title: 'Instant Provisioning', description: 'No waiting. Your server is deployed automatically the moment your payment is confirmed.', icon: '🕒', color: 'orange' },
-  { title: 'Dedicated Support', description: 'Our team is available on Discord 24/7 to help you with modpacks, plugins, and setup.', icon: '💬', color: 'red' }
+  { title: 'AMD Ryzen CPUs', description: 'Experience blazing-fast performance with Ryzen 7 & 9 series processors clocked at up to 5.7GHz.', icon: 'ryzen', color: 'blue' },
+  { title: 'NVMe SSD Storage', description: 'Low-latency disks ensure your server chunks and plugins load instantly without lag.', icon: 'ssd', color: 'cyan' },
+  { title: '1Tbps DDoS Shield', description: 'Stay online during the heaviest attacks with our advanced enterprise-grade filtration systems.', icon: 'shield', color: 'purple' },
+  { title: 'Singapore Premium', description: 'The lowest latency for South Asia & SE Asia, powered by high-tier bandwidth partners.', icon: 'sg', color: 'green' },
+  { title: 'Instant Provisioning', description: 'No waiting. Your server is deployed automatically the moment your payment is confirmed.', icon: 'clock', color: 'orange' },
+  { title: 'Dedicated Support', description: 'Our team is available on Discord 24/7 to help you with modpacks, plugins, and setup.', icon: 'support', color: 'red' }
 ];
 
 export const FAQS: FAQItem[] = [
@@ -74,24 +77,26 @@ export const FAQS: FAQItem[] = [
   { question: "Where are the servers located?", answer: "Our main hardware is located in the SGNS Datacenter in Jurong West, Singapore, offering the best route to Sri Lanka, India, and SE Asia." }
 ];
 
-export const TEAM = {
+export const TEAM: { founders: TeamMember[], members: TeamMember[] } = {
   founders: [
-    { name: 'MrBlaze', realName: 'Minuda Sandilu', role: 'Fullstack Developer' },
-    { name: 'FinicalFire', realName: 'Sachintha Shaymal', role: 'Network Engineer' },
-    { name: 'SIKK4', realName: 'Inuka Vihas', role: 'Fullstack Developer / Network Administrator' }
+    { name: 'Dithira', realName: 'Chief Executive Officer', role: 'CEO', discord: 'dithira.', avatar: 'https://cdn.discordapp.com/avatars/1166762404768645243/d902fe89771bb4b308b57a07b7e59e01.png' },
+    { name: 'MrBlaze', realName: 'Minuda Sandilu', role: 'Fullstack Developer', discord: 'mr_blaze_22', avatar: 'https://cdn.discordapp.com/avatars/1313437978076385311/cddf93216327fc55faeb63a1a32cb1a3.png' },
+    { name: 'FinicalFire', realName: 'Sachintha Shaymal', role: 'Backend Developer', discord: 'finicalfire', avatar: 'https://cdn.discordapp.com/avatars/1214611027828678741/3f0edc672aa22048893c6b1c2c0380c7.png' },
+    { name: 'SIKK4', realName: 'Inuka Vihas', role: 'Network Admin', discord: 'sikk4_', avatar: 'https://cdn.discordapp.com/avatars/959673474920636446/a_f38c4ec3fcdf4d536b6a6016495c754d.gif' }
   ],
   members: [
-    { name: 'Navindu', role: 'Head Admin' },
-    { name: 'DarkShadow', role: 'Billing Manager' },
-    { name: 'Jimmy', role: 'Support Agent' },
-    { name: 'Akain Perera', role: 'Network Engineer / V2Ray Developer' },
-    { name: 'NotzBB', role: 'Minecraft Server Developer / Minecraft Hosting Manager' },
-    { name: 'HanzoFer', role: 'Support / CEO' },
-    { name: 'Peheya', role: 'HR' }
+    { name: 'MrNavi', role: 'Head Admin', discord: 'navigaming', avatar: 'https://cdn.discordapp.com/avatars/1293178658709569636/099f41f092614c3253c0f089c12ca83e.png' },
+    { name: 'DarkShadow', role: 'Billing Manager', discord: 'darkshadowsl11', avatar: 'https://cdn.discordapp.com/avatars/1175608046957887542/c08a776bc10f98cd516df133c7f2e2e7.png' },
+    { name: 'Jimmy', role: 'Support Agent', discord: 'jimmymc124_', avatar: 'https://cdn.discordapp.com/avatars/1149564142064238653/5dfb2d2fae6e11acceda655a3d383698.png' },
+    { name: 'AkainPlayz', role: 'Network Engineer', discord: 'akainplayz', avatar: 'https://cdn.discordapp.com/avatars/879163460989095987/aed1f8f3c6b51ab1b5a05fed23d05edd.png' },
+    { name: 'NotzBB', role: 'MC Developer', discord: 'notzbb', avatar: 'https://cdn.discordapp.com/avatars/1126701851505590384/90564ab124f5b4f1a9b5568730781f97.png' },
+    { name: 'HanzoFer', role: 'Support / CEO', discord: 'hanzo97fer', avatar: 'https://cdn.discordapp.com/avatars/1350763344482799727/a2c7f76d5b9c9bb0494acdd4f79ab208.png' },
+    { name: 'Peheya', role: 'HR', discord: 'peheya', avatar: 'https://cdn.discordapp.com/avatars/1204018776610439238/d38e0c73c5b28527454682cc94be8c64.png' }
   ]
 };
 
 export const PARTNERS: Partner[] = [
+  { name: 'Eclipse Minecraft Network', type: 'Official Minecraft Network', url: 'https://eclipsemc.me', img: 'https://cdn.discordapp.com/icons/1427991997813227633/9fdf07be2831daa4b763d6814dc682f6.png' },
   { name: 'RasManer', type: 'Youtuber', url: 'https://www.youtube.com/@RasManer', img: 'https://yt3.googleusercontent.com/lDVeBdL0eKUfMSpczh9TV4Gkv5AvnzZVXy5rGx4Z4omP5ogYrNQ2OWSvp0pCrK_r-QHEWBP8ZHo=s160-c-k-c0x00ffffff-no-rj' },
   { name: 'DrMaxwave', type: 'Gaming Youtuber', url: 'https://www.youtube.com/@DRMaxWaveGaming', img: 'https://yt3.googleusercontent.com/IOg8CzTBG6fQf5EBDhrdTlx7JjC5lTapQSXmtG1CjOZ_8w3eTX7052y9Y2PmW9m-1jmJdUEu0tc=s160-c-k-c0x00ffffff-no-rj' },
   { name: 'CryingCraft', type: 'Minecraft Youtuber', url: 'https://www.youtube.com/@CryingCraftMc', img: 'https://yt3.googleusercontent.com/_62dEHdO-6MuCm8J4gjjlm-ie9hA1cSdI6g-4nl7alR6gzB5JNzjZ0aq5oOnucj1RRJYHU2jwQ=s160-c-k-c0x00ffffff-no-rj' }

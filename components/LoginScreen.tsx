@@ -1,94 +1,155 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrandLogo } from './Icons';
+import { User } from '../types';
 
 interface LoginScreenProps {
-  onLogin: () => void;
+  onLogin: (userData: User) => void;
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [step, setStep] = useState<'INITIAL' | 'VERIFYING' | 'SUCCESS'>('INITIAL');
   const [isRobotChecked, setIsRobotChecked] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const handleVerification = () => {
+  useEffect(() => {
+    let interval: any;
+    if (step === 'VERIFYING') {
+      interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setTimeout(() => setStep('SUCCESS'), 500);
+            return 100;
+          }
+          return prev + 2;
+        });
+      }, 30);
+    }
+    return () => clearInterval(interval);
+  }, [step]);
+
+  const handleVerify = () => {
     if (!isRobotChecked) return;
-    setIsProcessing(true);
-    // Simulated security handshake
-    setTimeout(() => {
-      onLogin();
-      setIsProcessing(false);
-    }, 2500);
+    setStep('VERIFYING');
+  };
+
+  const handleEnter = () => {
+    const mockUser: User = {
+      id: 'guest-' + Math.random().toString(36).substr(2, 9),
+      username: 'Visitor_' + Math.floor(Math.random() * 9999),
+      discriminator: '0001',
+      avatar: 'https://ui-avatars.com/api/?name=Visitor&background=3b82f6&color=fff&bold=true'
+    };
+    onLogin(mockUser);
   };
 
   return (
     <div className="fixed inset-0 bg-[#030712] z-[400] flex items-center justify-center p-6 overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/10 blur-[200px] rounded-full" />
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at center, transparent 0%, #030712 90%), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000')`,
-          backgroundSize: 'cover'
-        }} />
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
+        <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000')] bg-cover" />
+        <div className="absolute inset-0 backdrop-blur-3xl" />
       </div>
       
-      <div className="relative w-full max-w-md glass border border-white/10 rounded-[3.5rem] p-12 text-center shadow-3xl animate-in zoom-in-95 duration-700">
+      <div className="relative w-full max-w-md glass border border-white/10 rounded-[3.5rem] p-12 text-center shadow-3xl animate-in zoom-in-95 duration-700 z-10">
         <div className="animate-float mb-10">
            <BrandLogo className="w-24 h-24 mx-auto" />
         </div>
         
-        <h2 className="text-3xl font-black text-white uppercase tracking-[0.2em] mb-2">System Check</h2>
+        <h2 className="text-3xl font-black text-white uppercase tracking-[0.2em] mb-2">Infrastructure Portal</h2>
         <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em] mb-12 leading-relaxed opacity-60">
-          CodeOn Infrastructure Gatekeeper
+          Verification Required for Entry
         </p>
         
         <div className="space-y-6">
-          <div className="p-6 bg-white/5 border border-white/10 rounded-3xl text-left">
-             <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                <span className="text-[10px] font-black text-white uppercase tracking-widest">Awaiting Verification</span>
-             </div>
-             <p className="text-[9px] text-gray-500 font-bold uppercase leading-relaxed">
-               Please initiate the verification process to access the infrastructure portal and pricing modules.
-             </p>
-          </div>
+          {step === 'INITIAL' && (
+            <>
+              <div 
+                onClick={() => setIsRobotChecked(!isRobotChecked)}
+                className={`p-6 bg-white/5 border rounded-3xl flex items-center gap-6 cursor-pointer transition-all ${isRobotChecked ? 'border-blue-500/50 bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.1)]' : 'border-white/10 hover:border-white/20'}`}
+              >
+                <div className={`w-8 h-8 rounded-xl border-2 flex items-center justify-center transition-all ${isRobotChecked ? 'bg-blue-600 border-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.5)]' : 'border-white/20'}`}>
+                  {isRobotChecked && <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" /></svg>}
+                </div>
+                <div className="text-left">
+                  <span className="block text-[11px] font-black text-white uppercase tracking-widest">I am not a robot</span>
+                  <span className="block text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-1">Verification provided by CodeOn Shield</span>
+                </div>
+                <div className="ml-auto">
+                   <svg className="w-8 h-8 text-blue-500/20" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                   </svg>
+                </div>
+              </div>
 
-          {/* Robot Checkup Section */}
-          <div 
-            onClick={() => !isProcessing && setIsRobotChecked(!isRobotChecked)}
-            className={`p-4 bg-white/5 border rounded-2xl flex items-center gap-4 cursor-pointer transition-all ${isRobotChecked ? 'border-blue-500/50 bg-blue-500/5' : 'border-white/10 hover:border-white/20'}`}
-          >
-            <div className={`w-6 h-6 rounded border flex items-center justify-center transition-all ${isRobotChecked ? 'bg-blue-600 border-blue-600' : 'border-white/20'}`}>
-              {isRobotChecked && <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" /></svg>}
-            </div>
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">this check up for confirm you are not a robot</span>
-            <div className="ml-auto">
-               <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
-               </svg>
-            </div>
-          </div>
+              <button 
+                onClick={handleVerify}
+                disabled={!isRobotChecked}
+                className={`w-full py-5 rounded-3xl flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em] text-[12px] transition-all shadow-xl active:scale-95 disabled:opacity-30 disabled:grayscale group ${isRobotChecked ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/30' : 'bg-white/5 text-gray-600 border border-white/10'}`}
+              >
+                Access Portal
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </button>
+            </>
+          )}
 
-          <button 
-            onClick={handleVerification}
-            disabled={isProcessing || !isRobotChecked}
-            className={`w-full py-5 rounded-3xl flex flex-col items-center justify-center gap-1 font-black uppercase tracking-[0.2em] text-[11px] transition-all shadow-xl active:scale-95 disabled:opacity-50 group ${isRobotChecked ? 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-blue-600/20 hover:from-blue-500 hover:to-indigo-600' : 'bg-white/5 text-gray-700'}`}
-          >
-            {isProcessing ? (
-              <span className="flex items-center gap-3">
-                <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                Processing...
-              </span>
-            ) : (
-              <>
-                <span>CodeOn Verification Login</span>
-                <span className="text-[8px] opacity-60">Click to Verify Identity</span>
-              </>
-            )}
-          </button>
+          {step === 'VERIFYING' && (
+            <div className="py-8 space-y-6">
+              <div className="relative w-20 h-20 mx-auto">
+                <svg className="w-full h-full transform -rotate-90">
+                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-white/5" />
+                  <circle 
+                    cx="40" 
+                    cy="40" 
+                    r="36" 
+                    stroke="currentColor" 
+                    strokeWidth="8" 
+                    fill="transparent" 
+                    strokeDasharray={226.2} 
+                    strokeDashoffset={226.2 - (226.2 * progress) / 100} 
+                    className="text-blue-500 transition-all duration-300 ease-out"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs font-black text-white">{progress}%</span>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2">Analyzing Behavioral Patterns</h4>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] animate-pulse">Running heuristic analysis...</p>
+              </div>
+            </div>
+          )}
+
+          {step === 'SUCCESS' && (
+            <div className="py-6 space-y-8 animate-in fade-in zoom-in-90 duration-500">
+              <div className="w-20 h-20 bg-green-500/10 border-2 border-green-500 rounded-full flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+                <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <div>
+                <h4 className="text-lg font-black text-white uppercase tracking-tighter mb-2">Verification Passed</h4>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Welcome back to CodeOn Infrastructure.</p>
+              </div>
+              <button 
+                onClick={handleEnter}
+                className="w-full py-5 bg-green-600 hover:bg-green-500 text-white rounded-3xl font-black uppercase tracking-[0.3em] text-[12px] shadow-2xl shadow-green-600/30 transition-all active:scale-95"
+              >
+                Initialize Session
+              </button>
+            </div>
+          )}
         </div>
 
-        <div className="mt-16 text-[9px] font-black text-gray-800 uppercase tracking-[0.4em]">
-           Protected by CodeOn Shield v2.4
+        <div className="mt-16 flex flex-col items-center gap-2">
+           <span className="text-[9px] font-black text-gray-800 uppercase tracking-[0.4em]">Protected by CodeOn Shield v2.4</span>
+           <div className="flex gap-2">
+             <div className="w-1 h-1 bg-blue-500 rounded-full animate-ping" />
+             <div className="w-1 h-1 bg-blue-500 rounded-full animate-ping [animation-delay:0.2s]" />
+             <div className="w-1 h-1 bg-blue-500 rounded-full animate-ping [animation-delay:0.4s]" />
+           </div>
         </div>
       </div>
     </div>

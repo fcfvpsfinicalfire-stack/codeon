@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { NEW_YEAR_COUPON } from '../constants';
 
 const UpdateBanner: React.FC = () => {
   const scrollToCalculator = () => {
@@ -28,7 +29,8 @@ const UpdateBanner: React.FC = () => {
             Minecraft <span className="text-blue-400">1.21.11</span> is now available!
           </h3>
           <p className="text-gray-400 text-sm font-bold uppercase tracking-tight">
-            The <span className="text-blue-400 underline underline-offset-4 decoration-blue-500/50">Mounts of Mayhem</span> Minecraft update is available! Start a server today to play the new update with your friends.
+            The <span className="text-blue-400 underline underline-offset-4 decoration-blue-500/50">Mounts of Mayhem</span> update is here! 
+            Use code <span className="text-white font-black">{NEW_YEAR_COUPON}</span> to get <span className="text-cyan-400">26% OFF</span> your new server deployment!
           </p>
         </div>
 

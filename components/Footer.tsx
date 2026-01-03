@@ -30,7 +30,6 @@ const Footer: React.FC = () => {
             <li><a href="#pricing" className="hover:text-purple-400 transition-colors">Minecraft Hosting</a></li>
             <li><a href="#pricing" className="hover:text-purple-400 transition-colors">ARK Survival</a></li>
             <li><a href="#pricing" className="hover:text-purple-400 transition-colors">Cloud VPS</a></li>
-            <li><a href="#pricing" className="hover:text-purple-400 transition-colors">V2Ray Nodes</a></li>
           </ul>
         </div>
 

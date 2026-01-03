@@ -1,7 +1,9 @@
 
 import React from 'react';
 import { Plan, BillingCycle } from '../types';
-import { LKR_TO_EUR, DISCOUNT_PERCENT } from '../constants';
+import { LKR_TO_EUR, DISCOUNT_PERCENT, NEW_YEAR_COUPON } from '../constants';
+// Added theme type import
+import { Theme } from '../App';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -11,6 +13,8 @@ interface CartDrawerProps {
   onCheckout: () => void;
   currency: 'LKR' | 'EUR';
   billingCycle: BillingCycle;
+  // Added theme prop to interface
+  theme: Theme;
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ 
@@ -20,9 +24,10 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemove, 
   onCheckout, 
   currency, 
-  billingCycle 
+  billingCycle,
+  // Destructured theme prop
+  theme 
 }) => {
-  // Logic synced with PricingSection
   const calculateTotal = () => {
     let totalLKR = 0;
     cart.forEach(item => {
@@ -44,7 +49,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
   const symbol = currency === 'LKR' ? '₨' : '€';
   const displayTotal = currency === 'LKR' ? totalLKR.toLocaleString() : (totalLKR * LKR_TO_EUR).toFixed(2);
 
-  // Equivalent monthly price
   const multiplier = billingCycle === 'QUARTERLY' ? 3 : billingCycle === 'ANNUALLY' ? 12 : 1;
   const monthlyLKR = totalLKR / multiplier;
   const displayMonthly = currency === 'LKR' ? Math.floor(monthlyLKR).toLocaleString() : (monthlyLKR * LKR_TO_EUR).toFixed(2);
@@ -102,6 +106,17 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {cart.length > 0 && (
             <div className="p-6 border-t border-white/5 bg-white/5 space-y-4">
+              {/* Coupon Reminder Banner */}
+              <div className="bg-cyan-500/10 border border-cyan-400/30 rounded-xl p-3 flex items-center gap-3 animate-pulse">
+                <div className="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12.75 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5zM12.75 20.25a.75.75 0 01-1.5 0v1.5a.75.75 0 011.5 0v-1.5zM21.75 12a.75.75 0 01-1.5 0h-1.5a.75.75 0 011.5 0h1.5zM4.5 12a.75.75 0 01-1.5 0h-1.5a.75.75 0 011.5 0h1.5zM18.894 5.106a.75.75 0 00-1.06 0l-1.061 1.06a.75.75 0 001.06 1.061l1.061-1.06a.75.75 0 000-1.061zM7.227 16.773a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM18.894 18.894a.75.75 0 010-1.06l1.061-1.061a.75.75 0 011.06 1.06l-1.06 1.061a.75.75 0 01-1.061 0zM7.227 7.227a.75.75 0 000-1.06l-1.061-1.06a.75.75 0 00-1.06 1.06l1.06 1.061a.75.75 0 001.061 0z" /></svg>
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-black text-white uppercase tracking-tighter">Save More!</p>
+                  <p className="text-[8px] font-bold text-cyan-400 uppercase tracking-widest">Use <span className="text-white font-black">{NEW_YEAR_COUPON}</span> for 26% Extra Off</p>
+                </div>
+              </div>
+
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-end">
                   <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Total for {billingCycle.toLowerCase()}</span>

@@ -1,7 +1,8 @@
 
 import React, { useEffect, useRef } from 'react';
+import { Theme } from '../App';
 
-const MouseParticles: React.FC = () => {
+const MouseParticles: React.FC<{ theme: Theme }> = ({ theme }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -28,7 +29,9 @@ const MouseParticles: React.FC = () => {
         this.size = Math.random() * 3 + 1;
         this.speedX = Math.random() * 2 - 1;
         this.speedY = Math.random() * 2 - 1;
-        this.color = `hsla(${210 + Math.random() * 40}, 100%, 70%, 0.8)`;
+        const hue = theme === 'dark' ? 210 + Math.random() * 40 : 200 + Math.random() * 20;
+        const lightness = theme === 'dark' ? '70%' : '40%';
+        this.color = `hsla(${hue}, 100%, ${lightness}, 0.8)`;
         this.life = 1;
       }
 
@@ -84,13 +87,13 @@ const MouseParticles: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-[9999]"
-      style={{ mixBlendMode: 'screen' }}
+      style={{ mixBlendMode: theme === 'dark' ? 'screen' : 'multiply' }}
     />
   );
 };

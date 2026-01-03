@@ -10,15 +10,30 @@ export interface Plan {
   isRecommended?: boolean;
 }
 
-export type HostingCategory = 'MINECRAFT' | 'ARK' | 'VPS' | 'V2RAY' | 'CLOUD' | 'DEDICATED' | 'RUST' | 'MTA' | 'NODEJS';
+export type HostingCategory = 'MINECRAFT' | 'ARK' | 'VPS' | 'CLOUD' | 'DEDICATED' | 'RUST' | 'MTA' | 'NODEJS';
 
 export type BillingCycle = 'MONTHLY' | 'QUARTERLY' | 'ANNUALLY';
+
+export interface User {
+  username: string;
+  avatar: string;
+  id: string;
+  discriminator: string;
+}
 
 export interface Partner {
   name: string;
   type: string;
   url: string;
   img?: string;
+}
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  realName?: string;
+  discord: string;
+  avatar?: string;
 }
 
 export interface OrderDetails {

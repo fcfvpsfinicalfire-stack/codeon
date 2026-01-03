@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { DISCORD_URL } from '../constants';
 
 const PartnerToast: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,7 +24,7 @@ const PartnerToast: React.FC = () => {
   };
 
   const handleRedirect = () => {
-    window.open('https://discord.gg/CHAR4ABVWz', '_blank');
+    window.open(DISCORD_URL, '_blank');
   };
 
   if (isDismissed || !isVisible) return null;

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { GAMES, PLANS, DISCOUNT_PERCENT, DIRT_BLOCK_URL } from '../constants';
+import { GAMES, PLANS, DISCOUNT_PERCENT, DIRT_BLOCK_URL, NEW_YEAR_COUPON } from '../constants';
 import { Plan } from '../types';
 
 interface HeroProps {
@@ -74,16 +74,34 @@ const Hero: React.FC<HeroProps> = ({ onAddToCart }) => {
             Professional high-performance hosting for Minecraft, ARK, and VPS services. Singapore nodes with 99.9% uptime.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <a href="#pricing" className="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-500 hover:to-purple-600 text-white px-10 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-blue-600/30 transition-all flex items-center gap-3 transform active:scale-95">
-              Deploy Now <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-            </a>
+          <div className="flex flex-col gap-6">
+            {/* New Prominent Coupon Banner */}
+            <div className="group relative flex items-center gap-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-2 border-blue-500/50 rounded-3xl px-8 py-5 w-fit shadow-[0_0_40px_rgba(59,130,246,0.2)] animate-float">
+               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+               <div className="relative flex items-center gap-4">
+                  <div className="flex flex-col">
+                    <span className="text-blue-400 text-[9px] font-black uppercase tracking-[0.3em] mb-1">Limited Offer</span>
+                    <span className="text-white text-xl font-black uppercase tracking-widest">USE <span className="text-cyan-400 underline decoration-2 underline-offset-4">{NEW_YEAR_COUPON}</span></span>
+                  </div>
+                  <div className="w-[1px] h-10 bg-white/10 mx-2" />
+                  <div className="flex flex-col items-center">
+                    <span className="text-white text-3xl font-black">{DISCOUNT_PERCENT}%</span>
+                    <span className="text-[8px] font-black text-purple-400 uppercase tracking-widest">OFF NOW</span>
+                  </div>
+               </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4">
+              <a href="#pricing" className="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-500 hover:to-purple-600 text-white px-10 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-blue-600/30 transition-all flex items-center gap-3 transform active:scale-95">
+                Deploy Now <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Recommended Package UI */}
         <div className="flex-1 w-full max-w-md">
-           <div className="glass p-8 rounded-[3rem] border-2 border-blue-500/50 relative overflow-hidden shadow-2xl animate-float">
+           <div className="glass p-8 rounded-[3rem] border-2 border-blue-500/50 relative overflow-hidden shadow-2xl animate-float [animation-delay:1s]">
               <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-bl-3xl uppercase tracking-widest z-20">TOP PICK</div>
               <div className="flex items-center gap-6 mb-8 relative z-10">
                  <img src={DIRT_BLOCK_URL} className="w-20 h-20 drop-shadow-2xl" alt="MC Dirt" />
@@ -110,7 +128,7 @@ const Hero: React.FC<HeroProps> = ({ onAddToCart }) => {
                  <span className="text-4xl font-black text-white">₨ {Math.floor((recommendedPlan?.price || 0) * (1 - DISCOUNT_PERCENT/100)).toLocaleString()}</span>
                  <span className="text-xs text-gray-500 line-through">₨ {recommendedPlan?.price}</span>
               </div>
-              <p className="text-[9px] text-gray-600 font-bold uppercase mt-1">Per Month with 26% Discount Applied</p>
+              <p className="text-[9px] text-gray-600 font-bold uppercase mt-1">Per Month with {DISCOUNT_PERCENT}% Discount Applied</p>
               
               <button 
                 onClick={handleSelect}
