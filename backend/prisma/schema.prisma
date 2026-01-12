@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 1. users
+model User {
+  id                 Int       @id @default(autoincrement())
+  full_name          String?   @map("full_name")
+  email              String    @unique
+  username           String?   @unique
+  password_hash      String?   @map("password_hash")
+  role               String    @default("client") // client, admin
+  status             String    @default("active") // active, inactive, suspended
+  created_at         DateTime  @default(now()) @map("created_at")
+  last_login         DateTime? @map("last_login")
+  last_login_ip      String?   @map("last_login_ip") // NEW: IP Bind
+  account_secured_at DateTime? @map("account_secured_at") // NEW: When password was set
+  token_version      Int       @default(1) @map("token_version")
+
+  orders       Order[]
+  tickets      Ticket[]
+  magicLinks   MagicLink[]
+  activityLogs ActivityLog[]
+  Notification Notification[]
+
+  @@map("users")
+  @@index([email]) // Index for fast lookup
+}
+
+// 2. magic_links
+model MagicLink {
+  id         Int      @id @default(autoincrement())
+  user_id    Int      @map("user_id")
+  user       User     @relation(fields: [user_id], references: [id])
+  token      String   @unique
+  expires_at DateTime @map("expires_at")
+  used       Boolean  @default(false)
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@map("magic_links")
+}
+
+// 3. orders
+model Order {
+  id               Int      @id @default(autoincrement())
+  order_code       String   @unique @map("order_code") // Example: CO-1294
+  user_id          Int      @map("user_id")
+  user             User     @relation(fields: [user_id], references: [id])
+  service_type     String   @map("service_type") // minecraft, ark, fivem, rust
+  plan_name        String   @map("plan_name")
+  ram_gb           Int      @map("ram_gb")
+  price_lkr        Float    @map("price_lkr")
+  
+  // Payment Logic
+  payment_provider String   @default("MANUAL") @map("payment_provider") // MANUAL, PAYHERE, STRIPE
+  payment_status   String   @default("pending") @map("payment_status") // pending, submitted, paid, failed, refunded
+  
+  // Service Control
+  service_status   String   @default("pending") @map("service_status") // pending, active, hold, cancelled
+  hold_reason      String?  @map("hold_reason")
+  auto_renew       Boolean  @default(true) @map("auto_renew")
+  due_date         DateTime? @map("due_date")
+
+  // System
+  idempotency_key  String?  @unique @map("idempotency_key")
+  ip_address       String?  @map("ip_address")
+  status           String   @default("draft") // Lifecycle: draft -> pending -> paid -> active
+  created_at       DateTime @default(now()) @map("created_at")
+
+  payment Payment?
+  server  Server?
+  tickets Ticket[]
+
+  @@map("orders")
+  @@index([user_id])
+}
+
+// 4. payments
+model Payment {
+  id               Int      @id @default(autoincrement())
+  order_id         Int      @unique @map("order_id")
+  order            Order    @relation(fields: [order_id], references: [id])
+  method           String   @map("method") // bank, cash, wallet
+  amount           Float    @default(0.0) @map("amount") // Verified amount
+  transaction_id   String?  @map("transaction_id") // Bank Ref / Slip ID
+  proof_url        String   @map("proof_url")
+  status           String   @default("submitted") // submitted, approved, rejected
+  notes            String?  @map("notes")
+  
+  // Admin Approval
+  approved_by      Int?     @map("approved_by")
+  approved_at      DateTime? @map("approved_at")
+  rejection_reason String?  @map("rejection_reason")
+  
+  submitted_at     DateTime @default(now()) @map("submitted_at")
+
+  @@map("payments")
+  @@index([order_id])
+}
+
+// 5. servers
+model Server {
+  id         Int      @id @default(autoincrement())
+  order_id   Int      @unique @map("order_id")
+  order      Order    @relation(fields: [order_id], references: [id])
+  node_name  String   @map("node_name")
+  ip_address String   @map("ip_address")
+  port       Int      @map("port")
+  status     String   @default("deploying") // deploying, online, suspended
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@map("servers")
+}
+
+// 6. activity_logs
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  user_id    Int      @map("user_id")
+  user       User     @relation(fields: [user_id], references: [id])
+  action     String   // "ORDER_CREATED", "PAYMENT_SUBMITTED"
+  entity_type String? @map("entity_type") // ORDER, PAYMENT, AUTH
+  entity_id   String? @map("entity_id")
+  ip_address  String? @map("ip_address")
+  metadata    String? @map("metadata") // JSON string
+  created_at  DateTime @default(now()) @map("created_at")
+
+  @@map("activity_logs")
+  @@index([user_id])
+}
+
+// Legacy Ticket support (Automated messages)
+// Production-Ready Ticket System
+model Ticket {
+  id       String @id @default(uuid())
+  user_id  Int    @map("user_id")
+  user     User   @relation(fields: [user_id], references: [id])
+  order_id Int?   @map("order_id")
+  order    Order? @relation(fields: [order_id], references: [id])
+  subject  String
+  category String @default("general") // billing, technical, general
+  priority String @default("low") // low, medium, high
+  status   String @default("open") // open, replied, closed
+
+  messages TicketMessage[]
+
+  created_at DateTime @default(now()) @map("created_at")
+  updated_at DateTime @updatedAt @map("updated_at")
+
+  @@map("tickets")
+}
+
+model TicketMessage {
+  id         Int      @id @default(autoincrement())
+  ticket_id  String   @map("ticket_id")
+  ticket     Ticket   @relation(fields: [ticket_id], references: [id], onDelete: Cascade)
+  sender     String // client, admin
+  message    String
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@map("ticket_messages")
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  user_id    Int      @map("user_id")
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  type       String // info, success, warning, error
+  title      String
+  message    String
+  read       Boolean  @default(false)
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@map("notifications")
+}
